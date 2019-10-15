@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class detailPage extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    public Button homeBtn,searchBtn,rewardBtn,mypageBtn,mapBtn,profileBtn;
     private TextView textView1,textView2,textView3,stampCnt;
     private ImageView imageView;
     public LinearLayoutManager layoutManager;
@@ -46,6 +47,12 @@ public class detailPage extends AppCompatActivity {
         stampCnt = findViewById(R.id.stampCnt2);
         imageView = findViewById(R.id.imageView5);
 
+        homeBtn = findViewById(R.id.home);
+        searchBtn = findViewById(R.id.search);
+        rewardBtn = findViewById(R.id.button5);
+        mypageBtn = findViewById(R.id.user);
+        mapBtn = findViewById(R.id.map1);
+        profileBtn = findViewById(R.id.profile);
 
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -54,6 +61,51 @@ public class detailPage extends AppCompatActivity {
 
         adapter = new RecyclerViewA();
         recyclerView.setAdapter(adapter);
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),homePage.class);
+                startActivity(intent);
+            }
+        });
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),searchPage.class);
+                startActivity(intent);
+            }
+        });
+        rewardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),rewardPage.class);
+                startActivity(intent);
+            }
+        });
+        mypageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
+
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),mapPage.class);
+                startActivity(intent);
+            }
+        });
 
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
