@@ -1,10 +1,14 @@
 package com.example.arstest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +23,7 @@ public class searchPage extends AppCompatActivity {
     private EditText editSearch;        // 검색어를 입력할 Input 창
     private searchAdapter adapter;      // 리스트뷰에 연결할 아답터
     private ArrayList<String> arraylist;
+    private Button homeBtn,rewardBtn,userBtn,mapBtn,mypageBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,51 @@ public class searchPage extends AppCompatActivity {
 
         editSearch = (EditText) findViewById(R.id.keyword);
         listView = (ListView) findViewById(R.id.listView);
+        homeBtn = findViewById(R.id.home1);
+        rewardBtn = findViewById(R.id.presen);
+        userBtn = findViewById(R.id.user1);
+        mapBtn = findViewById(R.id.map);
+        mypageBtn = findViewById(R.id.profile);
+
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),mapPage.class);
+                startActivity(intent);
+            }
+        });
+
+        mypageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),homePage.class);
+                startActivity(intent);
+            }
+        });
+
+        rewardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),rewardPage.class);
+                startActivity(intent);
+            }
+        });
+
+        userBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
 
         // 리스트를 생성한다.
         list = new ArrayList<String>();

@@ -33,13 +33,13 @@
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <Button
-            android:id="@+id/map"
+            android:id="@+id/backBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/map" />
+            android:background="@drawable/backbtn" />
 
         <Button
             android:id="@+id/profile"

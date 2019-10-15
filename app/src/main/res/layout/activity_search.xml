@@ -90,7 +90,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
-                android:id="@+id/home"
+                android:id="@+id/home1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -115,7 +115,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
-                android:id="@+id/search"
+                android:id="@+id/search1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -168,7 +168,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
-                android:id="@+id/user"
+                android:id="@+id/user1"
                 android:layout_width="40dp"
                 android:layout_gravity="center"
                 android:layout_height="40dp"
