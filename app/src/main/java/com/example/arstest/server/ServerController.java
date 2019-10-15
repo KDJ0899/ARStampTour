@@ -10,6 +10,8 @@ import com.google.gson.JsonParser;
 
 public class ServerController  {
 
+    private JsonObject object;
+
     public ServerController(){}
     public ServerController(ContentValues data, String url)
     {
@@ -45,9 +47,12 @@ public class ServerController  {
             JsonParser jsonParser = new JsonParser();
             JsonArray jsonArray = (JsonArray) jsonParser.parse(result);
             for(int i=0; i<jsonArray.size(); i++){
-                JsonObject object = (JsonObject) jsonArray.get(i);
-                Log.i("name",object.get("Name")+"");
+                object = (JsonObject) jsonArray.get(i);
             }
         }
+    }
+
+    public JsonObject getObject() {
+        return object;
     }
 }
