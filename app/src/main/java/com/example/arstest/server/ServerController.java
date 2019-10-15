@@ -11,10 +11,12 @@ import com.google.gson.JsonParser;
 public class ServerController  {
 
     private JsonObject object;
+    private JsonArray jsonArray;
 
     public ServerController(){}
     public ServerController(ContentValues data, String url)
     {
+
         NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/"+url, data);
         networkTask.execute();
     }
@@ -45,14 +47,15 @@ public class ServerController  {
             super.onPostExecute(result);
 
             JsonParser jsonParser = new JsonParser();
-            JsonArray jsonArray = (JsonArray) jsonParser.parse(result);
+            jsonArray = (JsonArray) jsonParser.parse(result);
+
             for(int i=0; i<jsonArray.size(); i++){
-                object = (JsonObject) jsonArray.get(i);
+                
             }
         }
     }
-
-    public JsonObject getObject() {
-        return object;
+    public JsonArray getObject() {
+        return jsonArray;
     }
+
 }
