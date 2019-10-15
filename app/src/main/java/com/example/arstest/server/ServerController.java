@@ -2,34 +2,18 @@ package com.example.arstest.server;
 
 import android.content.ContentValues;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.arstest.R;
-import com.example.arstest.server.RequestHttpURLConnection;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class ServerController extends AppCompatActivity {
+public class ServerController  {
 
-    private TextView tvData;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        tvData = (TextView)findViewById(R.id.textView);
-
-        ContentValues data= new ContentValues();
-        data.put("select","id");
-        data.put("id",1);
-
-        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", data);
+    public ServerController(){}
+    public ServerController(ContentValues data, String url)
+    {
+        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/"+url, data);
         networkTask.execute();
     }
 
@@ -64,8 +48,6 @@ public class ServerController extends AppCompatActivity {
                 JsonObject object = (JsonObject) jsonArray.get(i);
                 Log.i("name",object.get("Name")+"");
             }
-
-            tvData.setText(result);
         }
     }
 }
