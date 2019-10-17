@@ -50,7 +50,7 @@ public class ServerController  {
             jsonArray = (JsonArray) jsonParser.parse(result);
 
             for(int i=0; i<jsonArray.size(); i++){
-                
+
             }
         }
     }
