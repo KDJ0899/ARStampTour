@@ -17,7 +17,7 @@ public class ServerController  {
     public ServerController(ContentValues data, String url)
     {
 
-        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/"+url, data);
+        NetworkTask networkTask = new NetworkTask("http://192.168.43.102:3000/"+url, data);
         networkTask.execute();
     }
 
@@ -54,7 +54,7 @@ public class ServerController  {
             }
         }
     }
-    public JsonArray getObject() {
+    public JsonArray getObjects() {
         return jsonArray;
     }
 
