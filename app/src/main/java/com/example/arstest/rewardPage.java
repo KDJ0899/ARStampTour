@@ -1,9 +1,11 @@
 package com.example.arstest;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,11 +18,59 @@ import java.util.ArrayList;
 public class rewardPage extends AppCompatActivity implements View.OnClickListener
 {
     private ListView m_oListView = null;
+    private Button homeBtn,searchBtn,userBtn,mapBtn,mypageBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward);
+
+        homeBtn = findViewById(R.id.imageHome);
+        searchBtn = findViewById(R.id.imageSearch);
+        userBtn = findViewById(R.id.imageMypage);
+        mapBtn = findViewById(R.id.map);
+        mypageBtn = findViewById(R.id.profile);
+
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),mapPage.class);
+                startActivity(intent);
+            }
+        });
+
+        mypageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),homePage.class);
+                startActivity(intent);
+            }
+        });
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),searchPage.class);
+                startActivity(intent);
+            }
+        });
+
+        userBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
 
         // 데이터 생성 ============================
         String[] strDate = {"2017-01-03", "1965-02-23", "2016-04-13", "2010-01-01", "2017-06-20",

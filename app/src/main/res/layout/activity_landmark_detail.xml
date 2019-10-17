@@ -136,14 +136,16 @@
 
                 <TextView
                     android:id="@+id/textView10"
-                    android:layout_width="match_parent"
+                    android:layout_width="370dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:text="테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트" />
 
                 <fragment
                     android:id="@+id/mapdetail"
                     class="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="370dp"
                     android:layout_height="300dp" />
 
             </LinearLayout>

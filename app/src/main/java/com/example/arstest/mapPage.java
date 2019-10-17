@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
 
     private Button button1, addBtn, back;
+    private Button homeBtn,rewardBtn,userBtn,mypageBtn,searchBtn;
     LinearLayout layout;
     private TextView txtResult, landmarkInformation;
     private RecyclerView recyclerView;
@@ -54,7 +55,56 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map_page);
         button1 = (Button)findViewById(R.id.button1);
         txtResult = (TextView)findViewById(R.id.txtResult);
-        back = (Button)findViewById(R.id.back);
+        back = (Button)findViewById(R.id.backBtn);
+        homeBtn = findViewById(R.id.imageHome);
+        rewardBtn = findViewById(R.id.imageReward);
+        userBtn = findViewById(R.id.imageMypage);
+        mypageBtn = findViewById(R.id.profile);
+        searchBtn = findViewById(R.id.imageSearch);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),homePage.class);
+                startActivity(intent);
+            }
+        });
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),searchPage.class);
+                startActivity(intent);
+            }
+        });
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),homePage.class);
+                startActivity(intent);
+            }
+        });
+        rewardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),rewardPage.class);
+                startActivity(intent);
+            }
+        });
+        userBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
+        mypageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
+
         landmarkInformation = (TextView)findViewById(R.id.landmarkInformation);
         landmarkInformation.setText("지역을 선택하세요.");
 
@@ -197,14 +247,6 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
 
                 setContentView(R.layout.activity_map);
 
-                Button backBtn = (Button)findViewById(R.id.back);
-                backBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(),mapPage.class);
-                        startActivity(intent);
-                    }
-                });
                 SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
                 mapFragment.getMapAsync((OnMapReadyCallback) context);
