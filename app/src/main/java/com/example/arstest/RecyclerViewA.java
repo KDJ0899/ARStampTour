@@ -19,7 +19,7 @@ public class RecyclerViewA extends RecyclerView.Adapter<RecyclerViewA.ViewHolder
     private String[] title = {"고척스카이돔", "제목2", "제목3", "제목4",
             "제목5", "제목6", "제목7", "제목8", "제목9", "제목10", };
 
-    private String[] content = {"내용1", "내용2", "내용3", "내용4",
+    private String[] content = {"서울특별시 구로구 경인로 430", "내용2", "내용3", "내용4",
             "내용5", "내용6", "내용7", "내용8", "내용9", "내용10", };
     public RecyclerViewA(){
 
