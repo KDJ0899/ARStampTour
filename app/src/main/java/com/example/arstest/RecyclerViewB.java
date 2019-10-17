@@ -24,7 +24,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
         public ViewHolder(View view) {
             super(view);
             this.textView = view.findViewById(R.id.textView);
-            this.imageView = view.findViewById(R.id.imageView);
+            this.imageView = view.findViewById(R.id.imageViewLocalGu);
         }
     }
 
@@ -38,6 +38,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.textView.setText(title[position]);
+        holder.imageView.setBackgroundResource(R.drawable.guro_main2);
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {

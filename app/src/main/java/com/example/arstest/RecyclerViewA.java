@@ -21,17 +21,22 @@ public class RecyclerViewA extends RecyclerView.Adapter<RecyclerViewA.ViewHolder
 
     private String[] content = {"내용1", "내용2", "내용3", "내용4",
             "내용5", "내용6", "내용7", "내용8", "내용9", "내용10", };
+    public RecyclerViewA(){
+
+    }
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
         public TextView textView;
         public TextView textView2;
         public ImageView imageView;
+        String imageID="";
 
         public ViewHolder(View view) {
             super(view);
             this.textView = view.findViewById(R.id.textView);
             this.textView2 = view.findViewById(R.id.textView2);
             this.imageView = view.findViewById(R.id.imageView);
+
         }
     }
 
@@ -47,6 +52,7 @@ public class RecyclerViewA extends RecyclerView.Adapter<RecyclerViewA.ViewHolder
     public void onBindViewHolder(final RecyclerViewA.ViewHolder holder, final int position) {
         holder.textView.setText(title[position]);
         holder.textView2.setText(content[position]);
+        holder.imageView.setBackgroundResource(R.drawable.guro_attraction00);
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override

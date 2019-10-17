@@ -8,6 +8,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -143,6 +144,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
                 recyclerView.setAdapter(adapter);
                 Button btn = new Button(context);
                 btn.setText("투어 신청하기");
+              //  btn.setGravity(Gravity.CENTER_VERTICAL);
                 layout = (LinearLayout)findViewById(R.id.linearlayout);
 
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams
