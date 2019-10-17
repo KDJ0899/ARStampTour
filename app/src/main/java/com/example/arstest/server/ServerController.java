@@ -46,12 +46,12 @@ public class ServerController  {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            JsonParser jsonParser = new JsonParser();
-            jsonArray = (JsonArray) jsonParser.parse(result);
-
-            for(int i=0; i<jsonArray.size(); i++){
-
-            }
+//            JsonParser jsonParser = new JsonParser();
+//            jsonArray = (JsonArray) jsonParser.parse(result);
+//
+//            for(int i=0; i<jsonArray.size(); i++){
+//
+//            }
         }
     }
     public JsonArray getObjects() {

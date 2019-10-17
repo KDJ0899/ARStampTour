@@ -2,11 +2,13 @@ package com.example.arstest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.arstest.server.ServerController;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,6 +24,13 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String attractionName = "고척스카이돔";
+        ContentValues cv = new ContentValues();
+        cv.put("from","attraction");
+        cv.put("where","name = "+attractionName);
+
+        ServerController serverconn = new ServerController(cv,"getAll");
+
         setContentView(R.layout.activity_landmark_detail);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdetail);
         mapFragment.getMapAsync(this);
