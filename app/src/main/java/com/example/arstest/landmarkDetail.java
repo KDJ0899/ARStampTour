@@ -44,10 +44,8 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
         ContentValues cv = new ContentValues();
         cv.put("where",attractionName);
 
-        Log.i("--------------------------","통신전");
         NetworkTask networkTask = new NetworkTask("http://10.0.103.96:3000/attraction", cv);
         networkTask.execute();
-        Log.i("--------------------------","통신후");
 
         setContentView(R.layout.activity_landmark_detail);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdetail);
