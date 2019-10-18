@@ -43,7 +43,6 @@ public class homePage extends AppCompatActivity {
 
         NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", values);
         networkTask.execute();
-//        ServerController server = new ServerController(values,"/local-gu","GET");
 
         setContentView(R.layout.activity_home_page);
 
@@ -63,18 +62,6 @@ public class homePage extends AppCompatActivity {
         mypageBtn = findViewById(R.id.imageMypage);
         profileBtn = findViewById(R.id.profile);
 
-//        recyclerView = findViewById(R.id.recycler_view);
-//        recyclerView.setHasFixedSize(true);
-//
-//        //layoutManager = new GridLayoutManager(this, 1);
-//        layoutManager = new LinearLayoutManager(this);
-//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//
-//
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        adapter = new RecyclerViewB();
-//        recyclerView.setAdapter(adapter);
 
 
         myStampt1.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +161,7 @@ public class homePage extends AppCompatActivity {
 
             recyclerView.setLayoutManager(layoutManager);
 
-            adapter = new RecyclerViewB(jsonArray,"Gu");
+            adapter = new RecyclerViewB(jsonArray,"Gu",context);
             recyclerView.setAdapter(adapter);
 
             Log.i("!!!!!!!!!!!!!!!!!!!!!!!!!",result);

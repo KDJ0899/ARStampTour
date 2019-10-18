@@ -1,5 +1,6 @@
 package com.example.arstest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -23,12 +24,14 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
     public List<String> Image;
     public List<String> Id;
     public JsonArray jsonArray;
+    Context context;
 
     public String table;
 
-    RecyclerViewB(JsonArray jsonArray,String table){
+    RecyclerViewB(JsonArray jsonArray,String table,Context v){
         this.jsonArray=jsonArray;
         this.table = table;
+        this.context = context;
     }
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
@@ -67,7 +70,10 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), Id.get(position)+"번 째 이미지!", Toast.LENGTH_SHORT).show();
+
+                if(table=="Gu") {
+                    Intent intent = new Intent(context,detailPage.class);
+                }
             }
         });
 
