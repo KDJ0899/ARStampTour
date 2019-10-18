@@ -28,7 +28,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
 
     public String table;
 
-    RecyclerViewB(JsonArray jsonArray,String table,Context v){
+    RecyclerViewB(JsonArray jsonArray,String table,Context context){
         this.jsonArray=jsonArray;
         this.table = table;
         this.context = context;
@@ -64,8 +64,9 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.textView.setText(name.get(position));
-        holder.imageView.setBackgroundResource(R.drawable.guro_main2);
+        holder.imageView.setBackgroundResource(context.getResources().getIdentifier("guro_main2", "drawable", context.getPackageName()));
 
+        출처: https://kanais2.tistory.com/195 [飛上]);
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,15 +74,20 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
 
                 if(table=="Gu") {
                     Intent intent = new Intent(context,detailPage.class);
+                    intent.putExtra("id", Id.get(position));
+                    context.startActivity( intent .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             }
         });
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), Id.get(position)+"번 째!", Toast.LENGTH_SHORT).show();
+                if(table=="Gu") {
+                    Intent intent = new Intent(context,detailPage.class);
+                    intent.putExtra("id", Id.get(position));
+                    context.startActivity( intent .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
             }
         });
     }

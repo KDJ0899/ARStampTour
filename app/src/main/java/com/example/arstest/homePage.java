@@ -1,5 +1,6 @@
 package com.example.arstest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,16 +11,19 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.arstest.server.RequestHttpURLConnection;
 import com.example.arstest.server.ServerController;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
+import java.util.Dictionary;
 import java.util.List;
 
 public class homePage extends AppCompatActivity {
@@ -163,9 +167,6 @@ public class homePage extends AppCompatActivity {
 
             adapter = new RecyclerViewB(jsonArray,"Gu",context);
             recyclerView.setAdapter(adapter);
-
-            Log.i("!!!!!!!!!!!!!!!!!!!!!!!!!",result);
-
         }
     }
 }
