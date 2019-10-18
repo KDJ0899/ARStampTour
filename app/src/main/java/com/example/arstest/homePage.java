@@ -18,11 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.arstest.DTO.localGU;
 import com.example.arstest.server.RequestHttpURLConnection;
 import com.example.arstest.server.ServerController;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.List;
 
@@ -162,10 +165,14 @@ public class homePage extends AppCompatActivity {
             layoutManager = new LinearLayoutManager(context);
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
+            Gson gson = new Gson();
+
+            localGU[] array = gson.fromJson(result, localGU[].class);
+            DataStorage.guList = Arrays.asList(array);
 
             recyclerView.setLayoutManager(layoutManager);
 
-            adapter = new RecyclerViewB(jsonArray,"Gu",context);
+            adapter = new RecyclerViewB(jsonArray,"Gu",context,result);
             recyclerView.setAdapter(adapter);
         }
     }
