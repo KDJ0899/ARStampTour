@@ -59,10 +59,12 @@ public class ListAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.activity_card_item, parent, false);
         }
 
-        TextView oTextTitle = (TextView) convertView.findViewById(R.id.textTitle);
+        TextView rewardTitle = (TextView) convertView.findViewById(R.id.rewardTitle);
+        TextView stampAmt = (TextView) convertView.findViewById(R.id.stampAmt);
         Button oBtn = (Button) convertView.findViewById(R.id.btnSelector);
 
-        oTextTitle.setText(m_oData.get(position).strTitle);
+        rewardTitle.setText(m_oData.get(position).strTitle);
+        stampAmt.setText(m_oData.get(position).strTitle);
         oBtn.setOnClickListener(m_oData.get(position).onClickListener);
 
         convertView.setTag(""+position);
