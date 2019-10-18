@@ -29,7 +29,7 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
         cv.put("from","attraction");
         cv.put("where","name = "+attractionName);
 
-        ServerController serverconn = new ServerController(cv,"getAll");
+        ServerController servercon = new ServerController(cv,"getAll");
 
         setContentView(R.layout.activity_landmark_detail);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdetail);
