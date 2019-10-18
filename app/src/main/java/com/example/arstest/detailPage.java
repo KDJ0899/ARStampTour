@@ -14,32 +14,34 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arstest.DTO.attraction;
 import com.example.arstest.server.RequestHttpURLConnection;
-import com.example.arstest.server.ServerController;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class detailPage extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     public Button homeBtn,searchBtn,rewardBtn,mypageBtn,mapBtn,profileBtn;
-    private TextView textView1,textView2,textView3,stampCnt;
+    private TextView textView1,textView2,textView3, textCurrenStamp, textTotalStamp,textGu,textSi,textInfo;
     private ImageView imageView;
     public LinearLayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-    JsonArray jsonArray;
     Context context;
-    int id;
+    int id,localSi;
+    String info,name;
+    List<attraction> attraction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,22 +51,13 @@ public class detailPage extends AppCompatActivity {
         Intent intent = getIntent();
 
         id=intent.getExtras().getInt("id");
-        ContentValues values = new ContentValues();
-        values.put("select", "*");
-        values.put("from","local_gu");
-        values.put("where","GU_Id = '"+id+"'");
+        localSi=intent.getExtras().getInt("si");
+        name=intent.getExtras().getString("name");
+        info=intent.getExtras().getString("info");
 
-        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", values);
-        networkTask.execute();
 
-        final AlertDialog.Builder oDialog = new AlertDialog.Builder(this,android.R.style.Theme_DeviceDefault_Light_Dialog);
-        final Button applyBtn = (Button)findViewById(R.id.applyBtn);
+        textCurrenStamp = findViewById(R.id.stampCnt2);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        textView1 = findViewById(R.id.textView21);
-        textView2 = findViewById(R.id.textView22);
-        textView3 = findViewById(R.id.textView23);
-        stampCnt = findViewById(R.id.stampCnt2);
         imageView = findViewById(R.id.imageView5);
 
         homeBtn = findViewById(R.id.home);
@@ -74,13 +67,48 @@ public class detailPage extends AppCompatActivity {
         mapBtn = findViewById(R.id.map1);
         profileBtn = findViewById(R.id.profile);
 
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        final AlertDialog.Builder oDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+        final Button applyBtn = (Button) findViewById(R.id.applyBtn);
 
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = findViewById(R.id.recyclerView);
+        textView1 = findViewById(R.id.textView21);
+        textView2 = findViewById(R.id.textView22);
+        textView3 = findViewById(R.id.textView23);
 
-        adapter = new RecyclerViewA();
-        recyclerView.setAdapter(adapter);
+        textGu = findViewById(R.id.gu);
+        textGu.setText(name);
+
+        textSi = findViewById(R.id.si);
+        textSi.setText(localSi + "");
+
+        textInfo = findViewById(R.id.info);
+        textInfo.setText(info);
+        textTotalStamp = findViewById(R.id.stampCnt);
+
+        if(DataStorage.guMap==null) {
+            ContentValues values = new ContentValues();
+            values.put("select", "*");
+            values.put("from", "attraction");
+
+            NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", values);
+            networkTask.execute();
+        }
+        else {
+            attraction = DataStorage.guMap.get(id);
+            if(attraction == null)
+                textTotalStamp.setText(0+"");
+            else
+                textTotalStamp.setText(attraction.size()+"");
+
+
+            layoutManager = new LinearLayoutManager(this);
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+            recyclerView.setLayoutManager(layoutManager);
+
+            adapter = new RecyclerViewC("",context,attraction);
+            recyclerView.setAdapter(adapter);
+        }
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +169,7 @@ public class detailPage extends AppCompatActivity {
                                 textView1.setTextColor(Color.parseColor("#000000"));
                                 textView2.setTextColor(Color.parseColor("#000000"));
                                 textView3.setTextColor(Color.parseColor("#000000"));
-                                stampCnt.setTextColor(Color.parseColor("#F44336"));
+                                textCurrenStamp.setTextColor(Color.parseColor("#F44336"));
                                 imageView.setBackgroundResource(R.drawable.stamp);
                                 oDialog.setMessage("투어 참여 완료!                          즐겁게 투어에 참여해보세요")
                                         .setPositiveButton("투어 계속 보기", new DialogInterface.OnClickListener() {
@@ -197,21 +225,44 @@ public class detailPage extends AppCompatActivity {
             if (result == null)
                 return;
 
-            JsonParser jsonParser = new JsonParser();
-            jsonArray = (JsonArray) jsonParser.parse(result);
+            Gson gson = new Gson();
+            List<attraction> list;
 
-            recyclerView = findViewById(R.id.recycler_view);
-            recyclerView.setHasFixedSize(true);
+            attraction[] array = gson.fromJson(result, attraction[].class);
+            DataStorage.attractions = Arrays.asList(array);
+            int localGu;
+            DataStorage.guMap = new HashMap<>();
 
-            //layoutManager = new GridLayoutManager(this, 1);
+            for(int i=0; i<array.length; i++){
+                localGu = array[i].getLOCAL_GU();
+                if(DataStorage.guMap.containsKey(localGu)) {
+                    list=DataStorage.guMap.get(localGu);
+                    list.add(array[i]);
+                    DataStorage.guMap.put(localGu,list);
+                }
+                else{
+                    list=new ArrayList<>();
+                    list.add(array[i]);
+                    DataStorage.guMap.put(localGu,list);
+                }
+            }
+            attraction = DataStorage.guMap.get(id);
+
+            if(attraction == null)
+                textTotalStamp.setText(0+"");
+            else {
+                textTotalStamp.setText(attraction.size()+"");
+            }
+
+
             layoutManager = new LinearLayoutManager(context);
-            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
             recyclerView.setLayoutManager(layoutManager);
 
-            adapter = new RecyclerViewB(jsonArray, "Gu", context,result);
+            adapter = new RecyclerViewC("",context,attraction);
             recyclerView.setAdapter(adapter);
+
         }
     }
 }

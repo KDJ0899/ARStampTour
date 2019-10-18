@@ -7,20 +7,36 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.arstest.server.RequestHttpURLConnection;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class MainActivity extends AppCompatActivity {
 
     //푸시알림 위한 선언
     NotificationManager notificationManager;
     PendingIntent pintent;
+    Boolean canLogin = false;
+    public static TextView userId,pw;
+
+    JsonArray jsonArray;
+    JsonObject jsonObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +44,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button registerbBtn = (Button)findViewById(R.id.button2);
-        Button loginBtn = (Button)findViewById(R.id.button);
+        Button loginBtn = (Button)findViewById(R.id.loginButton);
         Button mapBtn = (Button)findViewById(R.id.map);
         Button homeBtn = (Button)findViewById(R.id.home);
+        userId = findViewById(R.id.editText);
+        pw = findViewById(R.id.editText3);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent intent = new Intent(getApplicationContext(),homePage.class);
-                 startActivity(intent);
+                String userid = userId.getText().toString();
+                String password = pw.getText().toString();
+
+                ContentValues cv = new ContentValues();
+                cv.put("from","user");
+                cv.put("where","ID='"+userid+"' and Password='"+password+"';");
+
+                NetworkTask networkTask = new NetworkTask("http://10.0.103.96:3000/login", cv);
+                networkTask.execute();
+
             }
         });
 
@@ -109,5 +135,51 @@ public class MainActivity extends AppCompatActivity {
 
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0,builder.build());
+    }
+
+    public class NetworkTask extends AsyncTask<Void, Void, String> {
+
+        private String url;
+        private ContentValues values;
+
+        public NetworkTask(String url, ContentValues values) {
+
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String result; // 요청 결과를 저장할 변수.
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(result==null)
+                canLogin = false;
+            else
+                canLogin = true;
+
+            JsonParser jsonParser = new JsonParser();
+            jsonArray = (JsonArray)jsonParser.parse(result);
+
+            for(int i=0; i<jsonArray.size(); i++){
+                jsonObject = jsonArray.get(i).getAsJsonObject();
+                Log.i("json",jsonObject.get("Name").toString());
+            }
+
+            if(canLogin) {
+                Intent intent = new Intent(getApplicationContext(), homePage.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(getApplicationContext(),"아이디 혹은 비밀번호가 틀렸습니다.",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
