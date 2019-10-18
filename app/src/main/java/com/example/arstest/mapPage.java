@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -26,7 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
 
-    private Button back;
+    private Button backBtn;
     private Button homeBtn,rewardBtn,userBtn,mypageBtn,searchBtn;
     LinearLayout layout;
     Context context = this;
@@ -38,14 +37,15 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        back = (Button)findViewById(R.id.backBtn);
+        backBtn = findViewById(R.id.mapBackBtn);
         homeBtn = findViewById(R.id.imageHome);
         rewardBtn = findViewById(R.id.imageReward);
         userBtn = findViewById(R.id.imageMypage);
         mypageBtn = findViewById(R.id.profile);
         searchBtn = findViewById(R.id.imageSearch);
 
-       /* back.setOnClickListener(new View.OnClickListener() {
+
+        /*backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),homePage.class);
