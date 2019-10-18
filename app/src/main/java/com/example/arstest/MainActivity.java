@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),mapPage.class);
+                Intent intent = new Intent(getApplicationContext(), searchPage.class);
                 startActivity(intent);
             }
         });
