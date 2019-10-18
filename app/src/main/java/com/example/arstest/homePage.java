@@ -4,12 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.arstest.server.RequestHttpURLConnection;
+import com.example.arstest.server.ServerController;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+
+import java.util.List;
 
 public class homePage extends AppCompatActivity {
 
@@ -19,9 +30,21 @@ public class homePage extends AppCompatActivity {
     private ImageView myStampt1, myStampt2, myStampt3;
     public LinearLayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
+    public Context context =this;
+
+    public static JsonArray jsonArray;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ContentValues values = new ContentValues();
+        values.put("from","local_gu");
+
+
+        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", values);
+        networkTask.execute();
+//        ServerController server = new ServerController(values,"/local-gu","GET");
+
         setContentView(R.layout.activity_home_page);
 
          myStampt1 = findViewById(R.id.myStampTour1);
@@ -40,18 +63,18 @@ public class homePage extends AppCompatActivity {
         mypageBtn = findViewById(R.id.imageMypage);
         profileBtn = findViewById(R.id.profile);
 
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-
-        //layoutManager = new GridLayoutManager(this, 1);
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-
-        recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new RecyclerViewB();
-        recyclerView.setAdapter(adapter);
+//        recyclerView = findViewById(R.id.recycler_view);
+//        recyclerView.setHasFixedSize(true);
+//
+//        //layoutManager = new GridLayoutManager(this, 1);
+//        layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//
+//
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//        adapter = new RecyclerViewB();
+//        recyclerView.setAdapter(adapter);
 
 
         myStampt1.setOnClickListener(new View.OnClickListener() {
@@ -109,5 +132,53 @@ public class homePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public class NetworkTask extends AsyncTask<Void, Void, String> {
+
+        private String url;
+        private ContentValues values;
+
+        public NetworkTask(String url, ContentValues values) {
+
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String result; // 요청 결과를 저장할 변수.
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(result==null)
+                return;
+
+            JsonParser jsonParser = new JsonParser();
+            jsonArray = (JsonArray)jsonParser.parse(result);
+
+            recyclerView = findViewById(R.id.recycler_view);
+            recyclerView.setHasFixedSize(true);
+
+            //layoutManager = new GridLayoutManager(this, 1);
+            layoutManager = new LinearLayoutManager(context);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+
+            recyclerView.setLayoutManager(layoutManager);
+
+            adapter = new RecyclerViewB(jsonArray,"Gu");
+            recyclerView.setAdapter(adapter);
+
+            Log.i("!!!!!!!!!!!!!!!!!!!!!!!!!",result);
+
+        }
     }
 }
