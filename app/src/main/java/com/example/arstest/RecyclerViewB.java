@@ -59,7 +59,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.textView.setText(list.get(position).getName());
-        holder.imageView.setBackgroundResource(context.getResources().getIdentifier("guro_main2", "drawable", context.getPackageName()));
+        holder.imageView.setBackgroundResource(context.getResources().getIdentifier("guro_main", "drawable", context.getPackageName()));
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
