@@ -3,10 +3,12 @@ package com.example.arstest;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +23,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arstest.server.RequestHttpURLConnection;
+import com.example.arstest.server.ServerController;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 
 public class detailPage extends AppCompatActivity {
@@ -31,11 +37,25 @@ public class detailPage extends AppCompatActivity {
     private ImageView imageView;
     public LinearLayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
+    JsonArray jsonArray;
+    Context context;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_page);
+
+        Intent intent = getIntent();
+
+        id=intent.getExtras().getInt("id");
+        ContentValues values = new ContentValues();
+        values.put("select", "*");
+        values.put("from","local_gu");
+        values.put("where","GU_Id = '"+id+"'");
+
+        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", values);
+        networkTask.execute();
 
         final AlertDialog.Builder oDialog = new AlertDialog.Builder(this,android.R.style.Theme_DeviceDefault_Light_Dialog);
         final Button applyBtn = (Button)findViewById(R.id.applyBtn);
@@ -148,5 +168,50 @@ public class detailPage extends AppCompatActivity {
             }
         });
 
+    }
+
+    public class NetworkTask extends AsyncTask<Void, Void, String> {
+
+        private String url;
+        private ContentValues values;
+
+        public NetworkTask(String url, ContentValues values) {
+
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String result; // 요청 결과를 저장할 변수.
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (result == null)
+                return;
+
+            JsonParser jsonParser = new JsonParser();
+            jsonArray = (JsonArray) jsonParser.parse(result);
+
+            recyclerView = findViewById(R.id.recycler_view);
+            recyclerView.setHasFixedSize(true);
+
+            //layoutManager = new GridLayoutManager(this, 1);
+            layoutManager = new LinearLayoutManager(context);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+
+            recyclerView.setLayoutManager(layoutManager);
+
+            adapter = new RecyclerViewB(jsonArray, "Gu", context,result);
+            recyclerView.setAdapter(adapter);
+        }
     }
 }
