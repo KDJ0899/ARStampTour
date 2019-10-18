@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".rewardPage">
+    tools:context=".homePage">
 
 
     <TextView
@@ -33,6 +33,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="10dp"
+        android:background="#C3C3C3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline5"/>
+
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="10dp"
+        android:background="#C3C3C3"
+        app:layout_constraintBottom_toBottomOf="@id/guideline10"/>
 
     <View
         android:id="@+id/view"
@@ -73,7 +96,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/imageHome"
+        android:id="@+id/home"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="35dp"
@@ -179,18 +202,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
-    <ListView
-        android:id="@+id/list_cards"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="68dp"
-        android:layout_marginBottom="90dp"
-        android:divider="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline10"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="0dp" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -231,7 +242,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="109dp" />
+        app:layout_constraintGuide_percent="0.85"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
@@ -252,7 +263,142 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10"/>
+        app:layout_constraintGuide_percent="0.28"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="1dp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="64dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline10" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/myStampTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나의 스탬프 투어"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="226dp"
+        app:layout_constraintLeft_toRightOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline10" />
+
+    <ImageView
+        android:id="@+id/myStampTour1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="256dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline8"
+        app:layout_constraintLeft_toRightOf="@id/guideline3"/>
+
+    <TextView
+        android:id="@+id/localName"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="Image"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="383dp"
+        app:layout_constraintTop_toTopOf="@id/guideline8"
+        app:layout_constraintLeft_toRightOf="@id/guideline3"/>
+
+    <ImageView
+        android:id="@+id/myStampTour2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="13dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toTopOf="@id/guideline8"
+        app:layout_constraintLeft_toRightOf="@id/myStampTour1"/>
+
+    <TextView
+        android:id="@+id/localName2"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="13dp"
+        android:gravity="center"
+        android:text="Image"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@id/localName"
+        app:layout_constraintTop_toTopOf="@id/guideline8" />
+
+    <ImageView
+        android:id="@+id/myStampTour3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="13dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toTopOf="@id/guideline8"
+        app:layout_constraintLeft_toRightOf="@id/myStampTour2"/>
+
+    <TextView
+        android:id="@+id/localName3"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="Image"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:layout_marginLeft="13dp"
+        app:layout_constraintTop_toTopOf="@id/guideline8"
+        app:layout_constraintLeft_toRightOf="@id/localName2"/>
+
+    <Button
+        android:id="@+id/tourBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="투어 더 보기"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="411dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline5"/>
+
+    <ImageView
+        android:id="@+id/imageViewRecommend"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="469dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline6"/>
+
+    <TextView
+        android:id="@+id/RecommendlocalName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4D000000"
+        android:gravity="center"
+        android:text="Image"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="596dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline6"/>
+
+    <TextView
+        android:id="@+id/Recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9e9e9e"
+        android:gravity="left"
+        android:text="이런 투어 어떠세요?"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="469dp"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

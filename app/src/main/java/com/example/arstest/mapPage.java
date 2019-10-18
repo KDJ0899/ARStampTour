@@ -207,6 +207,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
                                 ViewGroup.LayoutParams.WRAP_CONTENT);
                 btn.setLayoutParams(lp);
                 if(btnCount==0){
+
                     layout.addView(btn);}
                 btnCount++;
             }
