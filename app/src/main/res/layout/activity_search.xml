@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".searchPage">
 
@@ -17,8 +17,8 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="170dp"
+            android:layout_marginTop="8dp"
             android:text="ARS"
             android:textColor="#000000"
             android:textSize="36sp" />
@@ -46,8 +46,8 @@
             android:id="@+id/profile"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="360dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -64,23 +64,23 @@
             android:id="@+id/localSi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"></Spinner>
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"></Spinner>
 
         <Spinner
             android:id="@+id/localGu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="190dp"></Spinner>
+            android:layout_marginLeft="190dp"
+            android:layout_marginTop="5dp"></Spinner>
 
         <Button
+            android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="검색"
-            android:id="@+id/btn_search"
+            android:layout_marginLeft="310dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="310dp" />
+            android:text="검색" />
 
 
     </RelativeLayout>
@@ -95,8 +95,7 @@
             android:id="@+id/landmarkInformation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            />
+            android:layout_marginTop="5dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -131,53 +130,53 @@
             android:id="@+id/textHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="53dp"
+            android:layout_marginLeft="47dp"
             android:layout_marginTop="60dp"
             android:text="홈"
             android:textSize="18sp" />
 
+
         <Button
             android:id="@+id/imageHome"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="35dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/home" />
-
 
         <TextView
             android:id="@+id/textSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="140dp"
+            android:layout_marginLeft="135dp"
             android:layout_marginTop="60dp"
             android:text="검색"
             android:textSize="18sp" />
 
+
         <Button
             android:id="@+id/imageSearch"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/search" />
-
 
         <TextView
             android:id="@+id/textReward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="225dp"
+            android:layout_marginLeft="221dp"
             android:layout_marginTop="60dp"
             android:text="리워드"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/imageReward"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="225dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/giftbox" />
 
 
@@ -185,17 +184,17 @@
             android:id="@+id/textMypage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="315dp"
+            android:layout_marginLeft="310dp"
             android:layout_marginTop="60dp"
             android:text="마이페이지"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/imageMypage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="330dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/user" />
 
     </RelativeLayout>
