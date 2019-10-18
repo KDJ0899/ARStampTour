@@ -36,7 +36,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_map);
         backBtn = findViewById(R.id.mapBackBtn);
         homeBtn = findViewById(R.id.imageHome);
         rewardBtn = findViewById(R.id.imageReward);
@@ -45,13 +45,13 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
         searchBtn = findViewById(R.id.imageSearch);
 
 
-        /*backBtn.setOnClickListener(new View.OnClickListener() {
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),homePage.class);
                 startActivity(intent);
             }
-        });*/
+        });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +113,6 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
                             gpsLocationListener);
                 }
 
-                setContentView(R.layout.activity_map);
 
                 SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
