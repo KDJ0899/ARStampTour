@@ -36,17 +36,23 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
     public TextView attraction,gu,si,addre,inf;
     String attractionName,guName,siName,address,info,imageAddress;
     LatLng latLng;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        attractionName = "고척스카이돔";
-        ContentValues cv = new ContentValues();
-        cv.put("where",attractionName);
 
+        Intent intent = getIntent();
+        id=intent.getExtras().getInt("id");
+
+        Log.i("json","--------------------------------attractionId = "+id+"-------------------------------------------------------------");
+        ContentValues cv = new ContentValues();
+        cv.put("where",id);
+
+        Log.i("json","--------------------------------서버연결-------------------------------------------------------------");
         NetworkTask networkTask = new NetworkTask("http://10.0.103.96:3000/attraction", cv);
         networkTask.execute();
-
+        Log.i("json","---------------------------------서버끝------------------------------------------------------------");
         setContentView(R.layout.activity_landmark_detail);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdetail);
         mapFragment.getMapAsync(this);
@@ -113,7 +119,7 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
                 .position(latLng)
                 .title(attractionName);
 
-        // 마커를 생성한다.
+//         마커를 생성한다.
         googleMap.addMarker(makerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
     }
@@ -124,14 +130,15 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
         private ContentValues values;
 
         public NetworkTask(String url, ContentValues values) {
-
+            Log.i("json","------------------------------네트워크 인자설정---------------------------------------------------------------");
             this.url = url;
             this.values = values;
         }
 
-        @Override
-        protected String doInBackground(Void... params) {
 
+        @Override
+        protected String doInBackground(Void... voids) {
+            Log.i("json","---------------------------------------백그라운드------------------------------------------------------");
             String result; // 요청 결과를 저장할 변수.
             RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
             result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
@@ -142,6 +149,7 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            Log.i("json","---------------------------------------------------------------------------------------------");
             if(result==null)
                 return;
 
@@ -165,6 +173,7 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
                 siName = jsonObject.get("siName").toString().replace("\"","");
                 String lt = jsonObject.get("Latitude").toString().replace("\"","");
                 String lg = jsonObject.get("Longitude").toString().replace("\"","");
+                attractionName = jsonObject.get("Name").toString().replace("\"","");
                 latLng = new LatLng(Double.valueOf(lt).doubleValue(),Double.valueOf(lg).doubleValue());
                 Log.i("-----------받은 결과 : ","info: "+info+" address: "+address+" imageAddress: "+imageAddress+" latlng: "+latLng+" guName: "+guName+" siName: "+siName);
                 Log.i("json",jsonObject.get("Name").toString());
@@ -179,3 +188,5 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
         }
     }
 }
+
+

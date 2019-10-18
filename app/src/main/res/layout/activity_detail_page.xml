@@ -87,16 +87,14 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginEnd="328dp"
-        android:layout_marginRight="328dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="65dp"
         android:layout_marginBottom="10dp"
         android:text="홈"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline7" />
+        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/search"
@@ -139,16 +137,14 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginRight="158dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginEnd="134dp"
         android:layout_marginBottom="10dp"
         android:text="리워드"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline7" />
+        app:layout_constraintStart_toEndOf="@+id/textView5" />
 
     <Button
         android:id="@+id/user"
