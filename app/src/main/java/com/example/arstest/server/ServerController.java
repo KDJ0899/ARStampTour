@@ -4,27 +4,23 @@ import android.content.ContentValues;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.arstest.DTO.localGU;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import java.util.List;
 
 public class ServerController  {
 
     private JsonObject jsonObject;
     private JsonArray jsonArray;
-    NetworkTask networkTask;
-    public static List<localGU> list;
 
     public ServerController(ContentValues data,String url)
     {
-        networkTask = new NetworkTask("http://10.0.102.44:3000"+url, data);
+
+        NetworkTask networkTask = new NetworkTask("http://192.168.43.102:3000/"+url, data);
         networkTask.execute();
     }
 
-    public class NetworkTask extends AsyncTask<Void, Void, String> {
+    public static class NetworkTask extends AsyncTask<Void, Void, String> {
 
         private String url;
         private ContentValues values;
@@ -52,7 +48,12 @@ public class ServerController  {
                 return;
 
             JsonParser jsonParser = new JsonParser();
-            jsonArray = (JsonArray)jsonParser.parse(result);
+//            jsonArray = (JsonArray)jsonParser.parse(result);
+//
+//            for(int i=0; i<jsonArray.size(); i++){
+//                jsonObject = jsonArray.get(i).getAsJsonObject();
+//                Log.i("json",jsonObject.get("Name").toString());
+//            }
 
         }
     }
