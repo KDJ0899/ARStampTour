@@ -33,7 +33,7 @@
             android:value="AIzaSyCYCVCliuPxf16EZ8xbOF2QtqSvk4bderI" />
 
         <activity android:name=".rewardPage"/>
-        <activity android:name=".searchPage"/>
+        <activity android:name=".searchPage" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".homePage" />
         <activity android:name=".landmarkDetail" />
         <activity android:name=".mapPage" />
