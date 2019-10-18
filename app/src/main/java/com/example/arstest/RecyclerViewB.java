@@ -25,17 +25,13 @@ import java.util.List;
 
 public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder> {
 
-    public JsonArray jsonArray;
     public  List<localGU> list;
     Context context;
-    String result;
     public String table;
 
-    RecyclerViewB(JsonArray jsonArray,String table,Context context,String result){
-        this.jsonArray=jsonArray;
+    RecyclerViewB(String table,Context context){
         this.table = table;
         this.context = context;
-        this.result = result;
 
         list = DataStorage.guList;
 
@@ -73,6 +69,10 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
                 if(table=="Gu") {
                     Intent intent = new Intent(context,detailPage.class);
                     intent.putExtra("id", list.get(position).getGu_Id());
+                    intent.putExtra("id", list.get(position).getGu_Id());
+                    intent.putExtra("name", list.get(position).getName());
+                    intent.putExtra("si", list.get(position).getLocal_Si());
+                    intent.putExtra("info", list.get(position).getInfo());
                     context.startActivity( intent .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             }
@@ -84,6 +84,9 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
                 if(table=="Gu") {
                     Intent intent = new Intent(context,detailPage.class);
                     intent.putExtra("id", list.get(position).getGu_Id());
+                    intent.putExtra("name", list.get(position).getName());
+                    intent.putExtra("si", list.get(position).getLocal_Si());
+                    intent.putExtra("info", list.get(position).getInfo());
                     context.startActivity( intent .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             }

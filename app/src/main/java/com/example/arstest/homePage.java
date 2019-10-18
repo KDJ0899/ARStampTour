@@ -47,11 +47,26 @@ public class homePage extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put("from","local_gu");
 
-
-        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", values);
-        networkTask.execute();
-
         setContentView(R.layout.activity_home_page);
+
+        if(DataStorage.guList==null) {
+            NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", values);
+            networkTask.execute();
+        }
+        else{
+
+            recyclerView = findViewById(R.id.recycler_view);
+            recyclerView.setHasFixedSize(true);
+
+            //layoutManager = new GridLayoutManager(this, 1);
+            layoutManager = new LinearLayoutManager(context);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+            recyclerView.setLayoutManager(layoutManager);
+
+            adapter = new RecyclerViewB("Gu",context);
+            recyclerView.setAdapter(adapter);
+        }
 
          myStampt1 = findViewById(R.id.myStampTour1);
          myStampt2 = findViewById(R.id.myStampTour2);
@@ -126,6 +141,7 @@ public class homePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     public class NetworkTask extends AsyncTask<Void, Void, String> {
@@ -155,8 +171,10 @@ public class homePage extends AppCompatActivity {
             if(result==null)
                 return;
 
-            JsonParser jsonParser = new JsonParser();
-            jsonArray = (JsonArray)jsonParser.parse(result);
+            Gson gson = new Gson();
+
+            localGU[] array = gson.fromJson(result, localGU[].class);
+            DataStorage.guList = Arrays.asList(array);
 
             recyclerView = findViewById(R.id.recycler_view);
             recyclerView.setHasFixedSize(true);
@@ -165,15 +183,11 @@ public class homePage extends AppCompatActivity {
             layoutManager = new LinearLayoutManager(context);
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-            Gson gson = new Gson();
-
-            localGU[] array = gson.fromJson(result, localGU[].class);
-            DataStorage.guList = Arrays.asList(array);
-
             recyclerView.setLayoutManager(layoutManager);
 
-            adapter = new RecyclerViewB(jsonArray,"Gu",context,result);
+            adapter = new RecyclerViewB("Gu",context);
             recyclerView.setAdapter(adapter);
+
         }
     }
 }

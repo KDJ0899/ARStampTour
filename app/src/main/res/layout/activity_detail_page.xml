@@ -229,7 +229,7 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/textvieww"
+        android:id="@+id/local"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -251,11 +251,11 @@
         android:text="서울특별시"
         android:textColor="#2196F3"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textvieww"
+        app:layout_constraintStart_toEndOf="@+id/local"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -282,10 +282,9 @@
 
     <TextView
         android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="20dp"
         android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
         android:layout_marginTop="115dp"
         android:text="현재"
         android:textColor="#00000000"
