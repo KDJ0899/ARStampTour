@@ -21,10 +21,14 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
 
     public List<String> name;
     public List<String> Image;
+    public List<String> Id;
     public JsonArray jsonArray;
 
-    RecyclerViewB(JsonArray jsonArray){
+    public String table;
+
+    RecyclerViewB(JsonArray jsonArray,String table){
         this.jsonArray=jsonArray;
+        this.table = table;
     }
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
@@ -37,6 +41,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
             this.imageView = view.findViewById(R.id.imageViewLocalGu);
             name=new ArrayList<>();
             Image=new ArrayList<>();
+            Id=new ArrayList<>();
 
         }
     }
@@ -48,6 +53,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
         for(int i=0;i<jsonArray.size(); i++){
             name.add(jsonArray.get(i).getAsJsonObject().get("Name").toString());
             Image.add(jsonArray.get(i).getAsJsonObject().get("Image").toString());
+            Id.add(jsonArray.get(i).getAsJsonObject().get(table+"_Id").toString());
         }
         return viewHolder;
     }
@@ -61,7 +67,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), position+"번 째 이미지!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), Id.get(position)+"번 째 이미지!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -69,7 +75,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), position+"번 째!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), Id.get(position)+"번 째!", Toast.LENGTH_SHORT).show();
             }
         });
     }
