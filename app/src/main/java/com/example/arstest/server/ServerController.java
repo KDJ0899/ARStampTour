@@ -16,11 +16,11 @@ public class ServerController  {
     public ServerController(ContentValues data,String url)
     {
 
-        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000"+url, data);
+        NetworkTask networkTask = new NetworkTask("http://192.168.43.102:3000/"+url, data);
         networkTask.execute();
     }
 
-    public class NetworkTask extends AsyncTask<Void, Void, String> {
+    public static class NetworkTask extends AsyncTask<Void, Void, String> {
 
         private String url;
         private ContentValues values;
@@ -29,7 +29,6 @@ public class ServerController  {
 
             this.url = url;
             this.values = values;
-
         }
 
         @Override
@@ -49,12 +48,12 @@ public class ServerController  {
                 return;
 
             JsonParser jsonParser = new JsonParser();
-            jsonArray = (JsonArray)jsonParser.parse(result);
-
-            for(int i=0; i<jsonArray.size(); i++){
-                jsonObject = jsonArray.get(i).getAsJsonObject();
-                Log.i("json",jsonObject.get("Name").toString());
-            }
+//            jsonArray = (JsonArray)jsonParser.parse(result);
+//
+//            for(int i=0; i<jsonArray.size(); i++){
+//                jsonObject = jsonArray.get(i).getAsJsonObject();
+//                Log.i("json",jsonObject.get("Name").toString());
+//            }
 
         }
     }
