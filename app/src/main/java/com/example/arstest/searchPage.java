@@ -1,52 +1,102 @@
 package com.example.arstest;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class searchPage extends AppCompatActivity {
 
-
-    private List<String> list;          // 데이터를 넣은 리스트변수
-    private ListView listView;          // 검색을 보여줄 리스트변수
-    private EditText editSearch;        // 검색어를 입력할 Input 창
-    private searchAdapter adapter;      // 리스트뷰에 연결할 아답터
-    private ArrayList<String> arraylist;
-    private Button homeBtn,rewardBtn,userBtn,mapBtn,mypageBtn;
+    private Button back;
+    private Button homeBtn,rewardBtn,userBtn,mypageBtn,searchBtn,backBtn;
+    LinearLayout layout;
+    private TextView landmarkInformation;
+    private RecyclerView recyclerView;
+    public LinearLayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
+    ArrayAdapter<CharSequence> adspin1, adspin2;
+    String selectedCity="";
+    String selectedCityDetail="";
+    Context context = this;
+    int btnCount=0;
+    private GoogleMap mMap;
+    double longitude, latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-
-        editSearch = (EditText) findViewById(R.id.keyword);
-        listView = (ListView) findViewById(R.id.listView);
-        homeBtn = findViewById(R.id.home1);
-        rewardBtn = findViewById(R.id.presen);
-        userBtn = findViewById(R.id.user1);
-        mapBtn = findViewById(R.id.map);
+        homeBtn = findViewById(R.id.imageHome);
+        rewardBtn = findViewById(R.id.imageReward);
+        userBtn = findViewById(R.id.imageMypage);
         mypageBtn = findViewById(R.id.profile);
+        searchBtn = findViewById(R.id.imageSearch);
+        backBtn = findViewById(R.id.backBtn);
 
-        mapBtn.setOnClickListener(new View.OnClickListener() {
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),mapPage.class);
+                Intent intent = new Intent(getApplicationContext(),homePage.class);
                 startActivity(intent);
             }
         });
 
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),searchPage.class);
+                startActivity(intent);
+            }
+        });
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),homePage.class);
+                startActivity(intent);
+            }
+        });
+        rewardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),rewardPage.class);
+                startActivity(intent);
+            }
+        });
+        userBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+        });
         mypageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,126 +105,121 @@ public class searchPage extends AppCompatActivity {
             }
         });
 
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),homePage.class);
-                startActivity(intent);
-            }
-        });
+        landmarkInformation = (TextView)findViewById(R.id.landmarkInformation);
+        landmarkInformation.setText("지역을 선택하세요.");
+        landmarkInformation.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        rewardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),rewardPage.class);
-                startActivity(intent);
-            }
-        });
 
-        userBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),myPage.class);
-                startActivity(intent);
-            }
-        });
+        recyclerView = findViewById(R.id.recyclerView);
 
-        // 리스트를 생성한다.
-        list = new ArrayList<String>();
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        // 검색에 사용할 데이터을 미리 저장한다.
-        settingList();
+        recyclerView.setLayoutManager(layoutManager);
 
-        // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
-        arraylist = new ArrayList<String>();
-        arraylist.addAll(list);
+        adapter = new RecyclerViewA();
 
-        // 리스트에 연동될 아답터를 생성한다.
-        adapter = new searchAdapter(list, this);
+        /*LinearLayout layout = (LinearLayout)findViewById(R.id.linearlayout);
+        Button btn = new Button(this);
+        btn.setText("투어 참여하기");
+        layout.addView(btn);*/
 
-        // 리스트뷰에 아답터를 연결한다.
-        listView.setAdapter(adapter);
+        final Spinner spin1 = (Spinner)findViewById(R.id.localSi);
+        final Spinner spin2 = (Spinner)findViewById(R.id.localGu);
+        Button btn_search = (Button)findViewById(R.id.btn_search);
 
-        // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
-        editSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+        adspin1 = ArrayAdapter.createFromResource(this, R.array.city, android.R.layout.simple_spinner_dropdown_item);
+
+        adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin1.setAdapter(adspin1);
+
+        spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-            }
+                if (adspin1.getItem(i).equals("서울특별시")) {
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // input창에 문자를 입력할때마다 호출된다.
-                // search 메소드를 호출한다.
-                String text = editSearch.getText().toString();
-                search(text);
-            }
-        });
+                    selectedCity = "서울특별시"; //출력을 위한 값 입력
+                    adspin2 = ArrayAdapter.createFromResource(searchPage.this, R.array.city_seoul, android.R.layout.simple_spinner_dropdown_item);
 
+                    adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spin2.setAdapter(adspin2);
+                    spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        //두번째 spinner 선택 이벤트를 정의합니다.
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            selectedCityDetail = adspin2.getItem(i).toString();
 
-    }
+                        }
 
-    // 검색을 수행하는 메소드
-    public void search(String charText) {
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
 
-        // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
-        list.clear();
+                        }
+                    });
+                } else if (adspin1.getItem(i).equals("부산광역시")) {
 
-        // 문자 입력이 없을때는 모든 데이터를 보여준다.
-        if (charText.length() == 0) {
-            list.addAll(arraylist);
-        }
-        // 문자 입력을 할때..
-        else
-        {
-            // 리스트의 모든 데이터를 검색한다.
-            for(int i = 0;i < arraylist.size(); i++)
-            {
-                // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                if (arraylist.get(i).toLowerCase().contains(charText))
-                {
-                    // 검색된 데이터를 리스트에 추가한다.
-                    list.add(arraylist.get(i));
+                    selectedCity = "부산광역시";
+                    adspin2 = ArrayAdapter.createFromResource(searchPage.this, R.array.city_busan, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spin2.setAdapter(adspin2);
+                    spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            selectedCityDetail = adspin2.getItem(i).toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                        }
+                    });
                 }
             }
-        }
-        // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
-        adapter.notifyDataSetChanged();
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        btn_search.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(searchPage.this, "선택된 도시는 " + selectedCity + " " + selectedCityDetail+" 입니다.", Toast.LENGTH_SHORT).show();
+                landmarkInformation.setText("선택 지역 " + selectedCity + " "+  selectedCityDetail +" 의 "+"획득 가능 스탬프 수는 15개 입니다.");
+                recyclerView.setAdapter(adapter);
+                Button btn = new Button(context);
+                btn.setText("투어 신청하기");
+              //  btn.setGravity(Gravity.CENTER_VERTICAL);
+                layout = findViewById(R.id.linearlayout);
+
+               /* ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                layout.setLayoutParams(params);*/
+
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams
+                        (LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT);
+                layout.setLayoutParams(param);
+
+
+
+                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams
+                        (ViewGroup.LayoutParams.WRAP_CONTENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
+                btn.setLayoutParams(lp);
+                if(btnCount==0){
+
+                    layout.addView(btn);}
+                btnCount++;
+            }
+        });
+
     }
 
-    // 검색에 사용될 데이터를 리스트에 추가한다.
-    private void settingList(){
-        list.add("채수빈");
-        list.add("박지현");
-        list.add("수지");
-        list.add("남태현");
-        list.add("하성운");
-        list.add("크리스탈");
-        list.add("강승윤");
-        list.add("손나은");
-        list.add("남주혁");
-        list.add("루이");
-        list.add("진영");
-        list.add("슬기");
-        list.add("이해인");
-        list.add("고원희");
-        list.add("설리");
-        list.add("공명");
-        list.add("김예림");
-        list.add("혜리");
-        list.add("웬디");
-        list.add("박혜수");
-        list.add("카이");
-        list.add("진세연");
-        list.add("동호");
-        list.add("박세완");
-        list.add("도희");
-        list.add("창모");
-        list.add("허영지");
-    }
 }
+
 
