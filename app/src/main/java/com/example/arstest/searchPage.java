@@ -205,11 +205,9 @@ public class searchPage extends AppCompatActivity {
                                 LinearLayout.LayoutParams.MATCH_PARENT);
                 layout.setLayoutParams(param);
 
-
-
                 ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams
-                        (ViewGroup.LayoutParams.WRAP_CONTENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT);
+                        (ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT);
                 btn.setLayoutParams(lp);
                 if(btnCount==0){
 
