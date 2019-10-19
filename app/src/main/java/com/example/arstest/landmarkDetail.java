@@ -52,7 +52,7 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
         cv.put("where",id);
 
         Log.i("json","--------------------------------서버연결-------------------------------------------------------------");
-        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/attraction", cv);
+        NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/attraction", cv);
         networkTask.execute();
         Log.i("json","---------------------------------서버끝------------------------------------------------------------");
         setContentView(R.layout.activity_landmark_detail);

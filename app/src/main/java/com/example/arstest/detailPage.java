@@ -90,7 +90,7 @@ public class detailPage extends AppCompatActivity {
             values.put("select", "*");
             values.put("from", "attraction");
 
-            NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/users", values);
+            NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", values);
             networkTask.execute();
         }
         else {
