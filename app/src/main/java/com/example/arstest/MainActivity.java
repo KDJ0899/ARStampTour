@@ -161,10 +161,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if(result==null)
+            Log.i("json","********************************result  = "+result);
+
+            if(result.equals("[]")){
+                Log.i("json","canLogin = "+canLogin);
                 canLogin = false;
-            else
+            }else{
+                Log.i("json","canLogin = "+canLogin);
                 canLogin = true;
+            }
 
             JsonParser jsonParser = new JsonParser();
             jsonArray = (JsonArray)jsonParser.parse(result);
@@ -174,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("json",jsonObject.get("Name").toString());
             }
 
+            Log.i("json","검사 전 canLogin = "+canLogin);
             if(canLogin) {
                 Intent intent = new Intent(getApplicationContext(), homePage.class);
                 startActivity(intent);
