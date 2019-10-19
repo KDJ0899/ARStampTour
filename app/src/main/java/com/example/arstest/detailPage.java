@@ -12,7 +12,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,11 +38,12 @@ public class detailPage extends AppCompatActivity {
     public Button homeBtn,searchBtn,rewardBtn,mypageBtn,mapBtn,profileBtn;
     private TextView textView1,textView2,textView3, textCurrenStamp, textTotalStamp,textGu,textSi,textInfo;
     private ImageView imageView;
+    private ImageButton imageButton;
     public LinearLayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-    Context context;
+    Context context= this;
     int id,localSi;
-    String info,name;
+    String info,name,image;
     List<attraction> attraction;
 
     @Override
@@ -54,11 +57,16 @@ public class detailPage extends AppCompatActivity {
         localSi=intent.getExtras().getInt("si");
         name=intent.getExtras().getString("name");
         info=intent.getExtras().getString("info");
+        image=intent.getExtras().getString("image");
+
+       ArrayAdapter adspin1 = ArrayAdapter.createFromResource(this, R.array.city, android.R.layout.simple_spinner_dropdown_item);
 
 
         textCurrenStamp = findViewById(R.id.stampCnt2);
 
         imageView = findViewById(R.id.imageView5);
+        imageButton = findViewById(R.id.imageButton);
+        imageButton.setBackgroundResource(context.getResources().getIdentifier(image, "drawable", context.getPackageName()));
 
         homeBtn = findViewById(R.id.home);
         searchBtn = findViewById(R.id.search);
@@ -79,7 +87,7 @@ public class detailPage extends AppCompatActivity {
         textGu.setText(name);
 
         textSi = findViewById(R.id.si);
-        textSi.setText(localSi + "");
+        textSi.setText(adspin1.getItem(localSi)+"");
 
         textInfo = findViewById(R.id.info);
         textInfo.setText(info);

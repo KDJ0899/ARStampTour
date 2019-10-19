@@ -69,10 +69,10 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
                 if(table=="Gu") {
                     Intent intent = new Intent(context,detailPage.class);
                     intent.putExtra("id", list.get(position).getGu_Id());
-                    intent.putExtra("id", list.get(position).getGu_Id());
                     intent.putExtra("name", list.get(position).getName());
                     intent.putExtra("si", list.get(position).getLocal_Si());
                     intent.putExtra("info", list.get(position).getInfo());
+                    intent.putExtra("image",list.get(position).getImage());
                     context.startActivity( intent .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             }
