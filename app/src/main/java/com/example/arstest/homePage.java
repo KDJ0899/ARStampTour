@@ -50,7 +50,7 @@ public class homePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         if(DataStorage.guList==null) {
-            NetworkTask networkTask = new NetworkTask("http://10.0.103.96:3000/users", values);
+            NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", values);
             networkTask.execute();
         }
         else{
