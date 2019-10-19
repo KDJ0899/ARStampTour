@@ -45,12 +45,14 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
         Intent intent = getIntent();
         id=intent.getExtras().getInt("id");
 
+        latLng = new LatLng(Double.valueOf(intent.getExtras().getString("latitude")).doubleValue(),Double.valueOf(intent.getExtras().getString("longitude")).doubleValue());
+
         Log.i("json","--------------------------------attractionId = "+id+"-------------------------------------------------------------");
         ContentValues cv = new ContentValues();
         cv.put("where",id);
 
         Log.i("json","--------------------------------서버연결-------------------------------------------------------------");
-        NetworkTask networkTask = new NetworkTask("http://10.0.103.96:3000/attraction", cv);
+        NetworkTask networkTask = new NetworkTask("http://10.0.102.44:3000/attraction", cv);
         networkTask.execute();
         Log.i("json","---------------------------------서버끝------------------------------------------------------------");
         setContentView(R.layout.activity_landmark_detail);

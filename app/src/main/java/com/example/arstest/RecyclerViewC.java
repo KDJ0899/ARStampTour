@@ -72,6 +72,8 @@ public class RecyclerViewC extends RecyclerView.Adapter<RecyclerViewC.ViewHolder
                 Toast.makeText(v.getContext(), position + "번 째 이미지!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, landmarkDetail.class);
                 intent.putExtra("id",list.get(position).getAtt_Id());
+                intent.putExtra("latitude",list.get(position).getLatitude());
+                intent.putExtra("longitude",list.get(position).getLongitude());
                 context.startActivity(intent);
             }
         });
@@ -81,6 +83,8 @@ public class RecyclerViewC extends RecyclerView.Adapter<RecyclerViewC.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(context, landmarkDetail.class);
                 intent.putExtra("id",list.get(position).getAtt_Id());
+                intent.putExtra("latitude",list.get(position).getLatitude());
+                intent.putExtra("longitude",list.get(position).getLongitude());
                 context.startActivity(intent);
             }
         });
@@ -90,6 +94,8 @@ public class RecyclerViewC extends RecyclerView.Adapter<RecyclerViewC.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(context, landmarkDetail.class);
                 intent.putExtra("id",list.get(position).getAtt_Id());
+                intent.putExtra("latitude",list.get(position).getLatitude());
+                intent.putExtra("longitude",list.get(position).getLongitude());
                 context.startActivity(intent);
             }
         });
