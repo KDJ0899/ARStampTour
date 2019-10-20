@@ -1,11 +1,13 @@
 package com.example.arstest;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -26,12 +28,20 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arstest.DTO.attraction;
+import com.example.arstest.server.RequestHttpURLConnection;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class searchPage extends AppCompatActivity {
 
@@ -45,6 +55,7 @@ public class searchPage extends AppCompatActivity {
     ArrayAdapter<CharSequence> adspin1, adspin2;
     String selectedCity="";
     String selectedCityDetail="";
+    int guNum;
     Context context = this;
     int btnCount=0;
     private GoogleMap mMap;
@@ -105,9 +116,9 @@ public class searchPage extends AppCompatActivity {
             }
         });
 
-        landmarkInformation = (TextView)findViewById(R.id.landmarkInformation);
-        landmarkInformation.setText("지역을 선택하세요.");
-        landmarkInformation.setGravity(Gravity.CENTER_HORIZONTAL);
+//        landmarkInformation = (TextView)findViewById(R.id.landmarkInformation);
+//        landmarkInformation.setText("지역을 선택하세요.");
+//        landmarkInformation.setGravity(Gravity.CENTER_HORIZONTAL);
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -151,6 +162,7 @@ public class searchPage extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             selectedCityDetail = adspin2.getItem(i).toString();
+                            guNum = i;
 
                         }
 
@@ -189,8 +201,12 @@ public class searchPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(searchPage.this, "선택된 도시는 " + selectedCity + " " + selectedCityDetail+" 입니다.", Toast.LENGTH_SHORT).show();
-                landmarkInformation.setText("선택 지역 " + selectedCity + " "+  selectedCityDetail +" 의 "+"획득 가능 스탬프 수는 15개 입니다.");
+                List<attraction> list = DataStorage.guMap.get(guNum+1);
+
+                int size = list==null?0:list.size();
+
+//                landmarkInformation.setText(selectedCity + " "+  selectedCityDetail +" 의 "+"획득 가능 스탬프 수는 "+size+"개 입니다.");
+                adapter = new RecyclerViewC("",context,list);
                 recyclerView.setAdapter(adapter);
                 Button btn = new Button(context);
                 btn.setText("투어 신청하기");
@@ -199,20 +215,20 @@ public class searchPage extends AppCompatActivity {
 
                /* ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,ConstraintLayout.LayoutParams.WRAP_CONTENT);
                 layout.setLayoutParams(params);*/
-
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams
-                        (LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT);
-                layout.setLayoutParams(param);
-
-                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams
-                        (ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.MATCH_PARENT);
-                btn.setLayoutParams(lp);
-                if(btnCount==0){
-
-                    layout.addView(btn);}
-                btnCount++;
+//
+//                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams
+//                        (LinearLayout.LayoutParams.MATCH_PARENT,
+//                                LinearLayout.LayoutParams.MATCH_PARENT);
+//                layout.setLayoutParams(param);
+//
+//                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams
+//                        (ViewGroup.LayoutParams.MATCH_PARENT,
+//                                ViewGroup.LayoutParams.MATCH_PARENT);
+//                btn.setLayoutParams(lp);
+//                if(btnCount==0){
+//
+//                    layout.addView(btn);}
+//                btnCount++;
             }
         });
 

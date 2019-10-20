@@ -9,5 +9,7 @@ import android.view.View;
 public class ItemData
 {
     public String strTitle;
+    public String strData;
+    public String image;
     public View.OnClickListener onClickListener;
 }

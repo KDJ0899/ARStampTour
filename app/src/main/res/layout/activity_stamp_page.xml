@@ -61,8 +61,8 @@
             android:id="@+id/textView26"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="100dp"
+            android:layout_marginTop="15dp"
             android:text="참여중인 스탬프 투어"
             android:textColor="#000000"
             android:textSize="24sp" />
@@ -85,8 +85,8 @@
                 android:id="@+id/imageView7"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginTop="3dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
                 app:srcCompat="@drawable/stamp" />
 
             <TextView
@@ -239,4 +239,18 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

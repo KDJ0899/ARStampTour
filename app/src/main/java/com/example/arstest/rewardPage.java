@@ -1,7 +1,9 @@
 package com.example.arstest;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +17,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.example.arstest.DTO.localGU;
+import com.example.arstest.server.RequestHttpURLConnection;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class rewardPage extends AppCompatActivity implements View.OnClickListener
 {
@@ -78,11 +86,14 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
                 startActivity(intent);
             }
         });
+        ContentValues cv = new ContentValues();
+        cv.put("from","REWARD");
+        cv.put("where","brand="+1);
+
+        NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", cv);
+        networkTask.execute();
 
         // 데이터 생성 ============================
-        String[] strDate = {"2017-01-03", "1965-02-23", "2016-04-13", "2010-01-01", "2017-06-20",
-                "2012-07-08", "1980-04-14", "2016-09-26", "2014-10-11", "2010-12-24"};
-        int nDatCnt=0;
         ArrayList<ItemData> oData = new ArrayList<>();
         for (int i=0; i<30; ++i)
         {
@@ -90,7 +101,6 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
             oItem.strTitle = "데이터 " + (i+1);
             oItem.onClickListener = this;
             oData.add(oItem);
-            if (nDatCnt >= strDate.length) nDatCnt = 0;
         }
 
         // ListView 생성 ===============================
@@ -196,6 +206,41 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
                 Toast.makeText(getApplicationContext(), "상품 구매 취소", Toast.LENGTH_LONG).show();
             }
         }).setCancelable(false).show();
+    }
+
+    public class NetworkTask extends AsyncTask<Void, Void, String> {
+
+        private String url;
+        private ContentValues values;
+
+        public NetworkTask(String url, ContentValues values) {
+
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String result; // 요청 결과를 저장할 변수.
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(result==null)
+                return;
+
+            Gson gson = new Gson();
+
+            localGU[] array = gson.fromJson(result, localGU[].class);
+            DataStorage.guList = Arrays.asList(array);
+
+        }
     }
 
 
