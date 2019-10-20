@@ -33,6 +33,7 @@ public class registerPage extends AppCompatActivity {
     String userSex,userSi,userGu;
     String selectedCity="";
     String selectedCityDetail="";
+    Boolean reRegister = false;
     Boolean canRegister = false;
 
     @Override
@@ -43,14 +44,13 @@ public class registerPage extends AppCompatActivity {
         spinnerSi = findViewById(R.id.spinnerSi);
         spinnerGu = findViewById(R.id.spinnerGu);
         userId = findViewById(R.id.userId);
-        userPassword = findViewById(R.id.userId);
+        userPassword = findViewById(R.id.userPassword);
         passwordCheck = findViewById(R.id.checkPassword);
-        userName = findViewById(R.id.userId);
-        userBirth = findViewById(R.id.userId);
-        userNumber = findViewById(R.id.userId);
-        year = findViewById(R.id.userId);
-        month = findViewById(R.id.userId);
-        day = findViewById(R.id.userId);
+        userName = findViewById(R.id.userName);
+        userNumber = findViewById(R.id.number);
+        year = findViewById(R.id.year);
+        month = findViewById(R.id.month);
+        day = findViewById(R.id.day);
         male = findViewById(R.id.radioMale);
         female = findViewById(R.id.radioFemale);
         registerBtn = findViewById(R.id.registerBtn);
@@ -130,10 +130,10 @@ public class registerPage extends AppCompatActivity {
                     val.put("birthday",userBirth);
                     val.put("phone",userNumber.getText().toString());
                     val.put("sex",userSex);
-                    val.put("si","1");
-                    val.put("gu","1");
-                    val.put("data","("+userId.getText().toString()+","+userPassword.getText().toString()+","+userName.getText().toString()+",'"+userBirth+"',"+userNumber.getText().toString()+",'"+userSex+"',"+"1,"+"1)");
-                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/register2",val);
+                    val.put("si",selectedCity);
+                    val.put("gu",selectedCityDetail);
+                    val.put("data","('"+userId.getText().toString()+"','"+userPassword.getText().toString()+"','"+userName.getText().toString()+"','"+userBirth+"','"+userNumber.getText().toString()+"','"+userSex+"',");
+                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/register",val);
                     networkTask.execute();
 
                 }else{
@@ -168,7 +168,17 @@ public class registerPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
+            Log.i("json","result = "+result);
+            if(result.equals("reRegister")) {
+                Toast.makeText(getApplicationContext(), "중복된 아이디입니다.", Toast.LENGTH_LONG).show();
+                reRegister = true;
+            }
+            else if(result.equals("success!")) {
+                reRegister = false;
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+            Log.i("json","reRegister = "+reRegister);
         }
     }
 }
