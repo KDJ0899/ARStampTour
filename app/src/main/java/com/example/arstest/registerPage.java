@@ -115,41 +115,27 @@ public class registerPage extends AppCompatActivity {
             public void onClick(View v) {
                 if(userPassword.getText().toString().equals(passwordCheck.getText().toString())){
 
-//                    String si = selectedCity;
-//                    String gu = selectedCityDetail;
-//                    ContentValues idCheck = new ContentValues();
-//                    idCheck.put("test","test");
-//                    idCheck.put("where","ID="+userId.getText().toString()+" and Password="+userPassword.getText().toString());
-//                    Log.i("json","********************************* * ID="+userId.getText().toString()+" and Password="+userPassword.getText().toString());
-//                    idCheck.put("idWhere","local_si.name = "+si+" and local_gu.Name = "+gu);
-//                    idCheck.put("siName",si);
-//                    idCheck.put("guName",gu);
-//
-//                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/idCheck",idCheck);
-//                    networkTask.execute();
-
                     if(male.isChecked()){
                         userSex="Male";
                     }else if(female.isChecked()){
                         userSex="Female";
                     }
-                    ContentValues cv = new ContentValues();
-//                    cv.put("ID",userId.getText().toString());
-//                    cv.put("Password",userPassword.getText().toString());
-//                    cv.put("Name",userName.getText().toString());
-//                    cv.put("year",year.getText().toString());
-//                    cv.put("month",month.getText().toString());
-//                    cv.put("day",day.getText().toString());
-//                    cv.put("Phone_No",userNumber.getText().toString());
-//                    cv.put("Sex",userSex);
-//                    cv.put("LOCAL_SI",selectedCity);
-//                    cv.put("LOCAL_GU",selectedCityDetail);
-                    cv.put("table","user");
-                    String userBirth = year+"-"+month+"-"+day;
-                    cv.put("values","("+userId.getText().toString()+","+userPassword.getText().toString()+","+userName.getText().toString()+","+userBirth+","+userNumber.getText().toString()+","+userSex+","+"1,"+"1)");
+                    String userBirth = year.getText().toString()+"-"+month.getText().toString()+"-"+day.getText().toString();
 
-                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/register",cv);
+                    ContentValues val = new ContentValues();
+                    val.put("table","user");
+                    val.put("id",userId.getText().toString());
+                    val.put("password",userPassword.getText().toString());
+                    val.put("name",userName.getText().toString());
+                    val.put("birthday",userBirth);
+                    val.put("phone",userNumber.getText().toString());
+                    val.put("sex",userSex);
+                    val.put("si","1");
+                    val.put("gu","1");
+                    val.put("data","("+userId.getText().toString()+","+userPassword.getText().toString()+","+userName.getText().toString()+",'"+userBirth+"',"+userNumber.getText().toString()+",'"+userSex+"',"+"1,"+"1)");
+                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/register2",val);
                     networkTask.execute();
+
                 }else{
                     Toast.makeText(getApplicationContext(),"비밀번호가 같지 않습니다.",Toast.LENGTH_LONG).show();
                 }

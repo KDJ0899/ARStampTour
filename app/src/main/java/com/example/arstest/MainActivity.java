@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 cv.put("from","user");
                 cv.put("where","ID='"+userid+"' and Password='"+password+"';");
 
-                NetworkTask networkTask = new NetworkTask("http://10.0.103.96:3000/login", cv);
+                NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/login", cv);
                 networkTask.execute();
 
             }
