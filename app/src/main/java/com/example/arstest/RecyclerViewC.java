@@ -64,12 +64,11 @@ public class RecyclerViewC extends RecyclerView.Adapter<RecyclerViewC.ViewHolder
     public void onBindViewHolder(final RecyclerViewC.ViewHolder holder, final int position) {
         holder.textView.setText(list.get(position).getName());
         holder.textView2.setText(list.get(position).getInfo());
-        holder.imageView.setBackgroundResource(R.drawable.guro_attraction00);
+        holder.imageView.setBackgroundResource(context.getResources().getIdentifier(list.get(position).getImage(), "drawable", context.getPackageName()));
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), position + "번 째 이미지!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, landmarkDetail.class);
                 intent.putExtra("id",list.get(position).getAtt_Id());
                 intent.putExtra("latitude",list.get(position).getLatitude());

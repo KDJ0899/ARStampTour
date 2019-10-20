@@ -96,7 +96,7 @@ public class detailPage extends AppCompatActivity {
         if(DataStorage.guMap==null) {
             ContentValues values = new ContentValues();
             values.put("select", "*");
-            values.put("from", "attraction");
+            values.put("from", "ATTRACTION");
 
             NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", values);
             networkTask.execute();

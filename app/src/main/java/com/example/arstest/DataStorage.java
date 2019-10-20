@@ -11,5 +11,5 @@ public class DataStorage {
     public static List<localGU> guList;
     public static Map<Integer,List<attraction>> guMap;
     public static List<attraction> attractions;
-    public static String ipAdress ="http://10.0.102.44:3000";
+    public static String ipAdress ="http://192.168.0.10:3000";
 }

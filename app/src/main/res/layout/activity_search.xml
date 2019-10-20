@@ -84,41 +84,30 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:id="@+id/landmarkInformation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
-
-
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
-        android:layout_height="470dp">
+        android:layout_height="530dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_marginTop="30dp" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="3dp"
-        android:background="#C3C3C3" />
 
     <RelativeLayout
         android:id="@+id/relMenu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:background="#C3C3C3" />
 
         <TextView
             android:id="@+id/textHome"
@@ -126,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="47dp"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="5dp"
             android:text="홈"
             android:textSize="18sp" />
 
@@ -144,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="135dp"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="5dp"
             android:text="검색"
             android:textSize="18sp" />
 
@@ -162,6 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="221dp"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="5dp"
             android:text="리워드"
             android:textSize="18sp" />
 
@@ -180,6 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="310dp"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="5dp"
             android:text="마이페이지"
             android:textSize="18sp" />
 

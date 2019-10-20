@@ -64,7 +64,7 @@ public class ListAdapter extends BaseAdapter
         Button oBtn = (Button) convertView.findViewById(R.id.btnSelector);
 
         rewardTitle.setText(m_oData.get(position).strTitle);
-        stampAmt.setText(m_oData.get(position).strTitle);
+        stampAmt.setText(m_oData.get(position).strData);
         oBtn.setOnClickListener(m_oData.get(position).onClickListener);
 
         convertView.setTag(""+position);

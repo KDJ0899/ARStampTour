@@ -47,12 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="구매하기"
-        android:layout_weight="40"
+        android:layout_weight="30"
         android:id="@+id/btnSelector"
-        />
-    <View
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="5"
         />
 </LinearLayout>

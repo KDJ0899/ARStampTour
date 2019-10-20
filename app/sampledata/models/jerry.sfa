@@ -1,0 +1,50 @@
+{
+  materials: [
+    {
+      name: 'jerry',
+      parameters: [
+        {
+          baseColor: 'jerry',
+        },
+        {
+          baseColorTint: [
+            0.80000000000000004,
+            0.80000000000000004,
+            0.80000000000000004,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/jerry.obj',
+    name: 'jerry',
+    recenter: 'root',
+    scale: 0.13910400000000001,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models\\jerry.png',
+      name: 'jerry',
+      pipeline_name: 'jerry.png',
+    },
+  ],
+  version: '0.54:2',
+}
