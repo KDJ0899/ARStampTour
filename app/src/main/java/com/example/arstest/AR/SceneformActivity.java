@@ -106,7 +106,7 @@ public class SceneformActivity extends AppCompatActivity {
     // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
 
     ModelRenderable.builder()
-        .setSource(this, R.raw.sorbe)
+        .setSource(this, R.raw.avocado)
         .build()
         .thenAccept(renderable -> andyRenderable = renderable)
         .exceptionally(
