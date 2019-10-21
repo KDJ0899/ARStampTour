@@ -33,16 +33,16 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
     public TextView attraction,gu,si,addre,inf;
     String attractionName,guName,siName,address,info,imageAddress;
     LatLng latLng;
-    int id;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        id=intent.getExtras().getInt("id");
+        id=intent.getExtras().getString("id");
 
-        latLng = new LatLng(Double.valueOf(intent.getExtras().getString("latitude")).doubleValue(),Double.valueOf(intent.getExtras().getString("longitude")).doubleValue());
+        latLng = new LatLng(intent.getDoubleExtra("latitude",0),intent.getDoubleExtra("longitude",0));
 
         Log.i("json","--------------------------------attractionId = "+id+"-------------------------------------------------------------");
         ContentValues cv = new ContentValues();
@@ -157,7 +157,7 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
 
             //동적으로 변경될 것들
             mainImage = findViewById(R.id.imageView2);
-            attraction = findViewById(R.id.attractionName);
+            attraction = findViewById(R.id.title);
             gu = findViewById(R.id.guName);
             si = findViewById(R.id.kind);
             addre = findViewById(R.id.address);
