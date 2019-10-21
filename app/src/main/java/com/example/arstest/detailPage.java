@@ -179,7 +179,7 @@ public class detailPage extends AppCompatActivity {
                                 textView3.setTextColor(Color.parseColor("#000000"));
                                 textCurrenStamp.setTextColor(Color.parseColor("#F44336"));
                                 imageView.setBackgroundResource(R.drawable.stamp);
-                                oDialog.setMessage("투어 참여 완료!                          즐겁게 투어에 참여해보세요")
+                                oDialog.setMessage("투어 참여 완료!\n즐겁게 투어에 참여해보세요")
                                         .setPositiveButton("투어 계속 보기", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
