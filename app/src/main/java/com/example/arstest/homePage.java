@@ -109,6 +109,13 @@ public class homePage extends AppCompatActivity {
         }
         else{
 
+
+            values = new ContentValues();
+            values.put("from","REGISTER_TOUR");
+            values.put("where","User_Id = "+DataStorage.userDetail.getUser_Id());
+            NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", values);
+            networkTask.execute();
+
             recyclerView = findViewById(R.id.recycler_view);
             recyclerView.setHasFixedSize(true);
 
@@ -140,13 +147,19 @@ public class homePage extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
-            for(int i=0; i<3;i++){
-                if(DataStorage.registerTours.size()==i){
-                    break;
+            if(DataStorage.registerTours!=null) {
+                for (int i = 0; i < 3; i++) {
+                    if (DataStorage.registerTours.size() == i) {
+                        break;
+                    }
+                    RegisterTour gu = DataStorage.registerTours.get(i);
+                    for (int j = 0; j < DataStorage.guList.size(); j++) {
+                        if (DataStorage.guList.get(j).getGu_Id() == gu.getGu_Id()) {
+                            ImageList.get(i).setBackgroundResource(getResources().getIdentifier(DataStorage.guList.get(j).getMainAttraction(), "drawable", context.getPackageName()));
+                            TextList.get(i).setText(DataStorage.guList.get(j).getName());
+                        }
+                    }
                 }
-                ImageList.get(i).setBackgroundResource(getResources().getIdentifier(DataStorage.guList.get(DataStorage.registerTours.get(i).getGu_Id()).getMainAttraction(), "drawable", context.getPackageName()));
-                TextList.get(i).setText(DataStorage.guList.get(DataStorage.registerTours.get(i).getGu_Id()).getName());
             }
         }
 
@@ -302,7 +315,7 @@ public class homePage extends AppCompatActivity {
 
                     values = new ContentValues();
                     values.put("from","REGISTER_TOUR");
-                    values.put("where","User_Id = 1");
+                    values.put("where","User_Id = "+DataStorage.userDetail.getUser_Id());
                     NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", values);
                     networkTask.execute();
 
@@ -313,12 +326,18 @@ public class homePage extends AppCompatActivity {
                     RegisterTour[] array3 = gson.fromJson(result,RegisterTour[].class);
                     DataStorage.registerTours = Arrays.asList(array3);
 
+
                     for(int i=0; i<3;i++){
-                        if(DataStorage.registerTours.size()==i){
+                        if(DataStorage.registerTours.size()==i) {
                             break;
                         }
-                        ImageList.get(i).setBackgroundResource(getResources().getIdentifier(DataStorage.guList.get(DataStorage.registerTours.get(i).getGu_Id()).getMainAttraction(), "drawable", context.getPackageName()));
-                        TextList.get(i).setText(DataStorage.guList.get(DataStorage.registerTours.get(i).getGu_Id()).getName());
+                        RegisterTour gu = DataStorage.registerTours.get(i);
+                        for(int j=0; j<DataStorage.guList.size(); j++){
+                            if(DataStorage.guList.get(j).getGu_Id() == gu.getGu_Id()) {
+                                ImageList.get(i).setBackgroundResource(getResources().getIdentifier(DataStorage.guList.get(j).getMainAttraction(), "drawable", context.getPackageName()));
+                                TextList.get(i).setText(DataStorage.guList.get(j).getName());
+                            }
+                        }
                     }
 
                 }
@@ -333,6 +352,12 @@ public class homePage extends AppCompatActivity {
         int id = DataStorage.registerTours.get(num).getGu_Id();
         Intent intent = new Intent(getApplicationContext(),detailPage.class);
         List<localGU> list = DataStorage.guList;
+        for(int i=0; i<list.size();i++) {
+            if(id==list.get(i).getGu_Id()) {
+                id = i;
+                break;
+            }
+        }
         intent.putExtra("id", list.get(id).getGu_Id());
         intent.putExtra("name", list.get(id).getName());
         intent.putExtra("si", list.get(id).getLocal_Si());

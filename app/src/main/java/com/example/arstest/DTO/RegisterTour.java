@@ -7,6 +7,13 @@ public class RegisterTour {
     int Gu_Id;
     int Complete;
 
+    public RegisterTour() {
+    }
+
+    public RegisterTour(int user_Id) {
+        User_Id = user_Id;
+    }
+
     public int getReq_id() {
         return req_id;
     }

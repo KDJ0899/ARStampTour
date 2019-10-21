@@ -42,6 +42,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.arstest.R;
+import com.example.arstest.detailPage;
+import com.example.arstest.homePage;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
@@ -50,6 +52,7 @@ import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
+import com.google.ar.sceneform.ux.BaseTransformableNode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -86,6 +89,7 @@ public class SceneformActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
 
     Capture = findViewById(R.id.btnCapture);
+    Back = findViewById(R.id.btnBack);
 
 
 
@@ -137,6 +141,13 @@ public class SceneformActivity extends AppCompatActivity {
 
 
           Capture.setOnClickListener(capture->{takePhoto();});
+          Back.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  Intent intent = new Intent(getApplicationContext(), homePage.class);
+                  startActivity(intent);
+              }
+          });
 
           // Create the Anchor.
           Anchor anchor = hitResult.createAnchor();

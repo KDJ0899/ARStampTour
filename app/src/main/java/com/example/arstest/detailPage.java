@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arstest.DTO.RegisterTour;
 import com.example.arstest.DTO.attraction;
 import com.example.arstest.server.RequestHttpURLConnection;
 import com.google.gson.Gson;
@@ -163,42 +164,71 @@ public class detailPage extends AppCompatActivity {
             }
         });
 
-        applyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oDialog.setMessage("서울특별시 구로구 투어에 참여하시겠습니까?")
-                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.i("Dialog","예");
-                                applyBtn.setText("투어 진행 중");
-                                applyBtn.setBackgroundResource(R.drawable.readibtn_background);
-                                textView1.setTextColor(Color.parseColor("#000000"));
-                                textView2.setTextColor(Color.parseColor("#000000"));
-                                textView3.setTextColor(Color.parseColor("#000000"));
-                                textCurrenStamp.setTextColor(Color.parseColor("#F44336"));
-                                imageView.setBackgroundResource(R.drawable.stamp);
-                                oDialog.setMessage("투어 참여 완료!\n즐겁게 투어에 참여해보세요")
-                                        .setPositiveButton("투어 계속 보기", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                            }
-                                        }).setNegativeButton("홈으로 돌아가기", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(getApplicationContext(),homePage.class);
-                                        startActivity(intent);
-                                    }
-                                }).setCancelable(false).show();
-                            }
-                        }).setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.i("Dialog", "아니오");
-                    }
-                }).setCancelable(false).show();
+        boolean registered = false;
+        if(DataStorage.registerTours!=null){
+            for(int i=0; i<DataStorage.registerTours.size(); i++){
+                if(id==DataStorage.registerTours.get(i).getGu_Id()) {
+                    registered = true;
+                    break;
+                }
             }
-        });
+        }
+
+        if(registered){
+            applyBtn.setText("투어 진행 중");
+            applyBtn.setBackgroundResource(R.drawable.readibtn_background);
+            textView1.setTextColor(Color.parseColor("#000000"));
+            textView2.setTextColor(Color.parseColor("#000000"));
+            textView3.setTextColor(Color.parseColor("#000000"));
+            textCurrenStamp.setTextColor(Color.parseColor("#F44336"));
+            imageView.setBackgroundResource(R.drawable.stamp);
+        }
+        else {
+            applyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    oDialog.setMessage("서울특별시 구로구 투어에 참여하시겠습니까?")
+                            .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.i("Dialog", "예");
+
+                                    ContentValues cv = new ContentValues();
+                                    cv.put("into" ,"REGISTER_TOUR");
+                                    cv.put("values","0,"+DataStorage.userDetail.getUser_Id()+","+id+",0");
+
+                                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users/insert",cv);
+                                    networkTask.execute();
+
+                                    applyBtn.setText("투어 진행 중");
+                                    applyBtn.setBackgroundResource(R.drawable.readibtn_background);
+                                    textView1.setTextColor(Color.parseColor("#000000"));
+                                    textView2.setTextColor(Color.parseColor("#000000"));
+                                    textView3.setTextColor(Color.parseColor("#000000"));
+                                    textCurrenStamp.setTextColor(Color.parseColor("#F44336"));
+                                    imageView.setBackgroundResource(R.drawable.stamp);
+                                    oDialog.setMessage("투어 참여 완료!\n즐겁게 투어에 참여해보세요")
+                                            .setPositiveButton("투어 계속 보기", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                }
+                                            }).setNegativeButton("홈으로 돌아가기", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(getApplicationContext(), homePage.class);
+                                            startActivity(intent);
+                                        }
+                                    }).setCancelable(false).show();
+                                }
+                            }).setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.i("Dialog", "아니오");
+                        }
+                    }).setCancelable(false).show();
+                }
+            });
+        }
 
     }
 
@@ -228,7 +258,12 @@ public class detailPage extends AppCompatActivity {
             super.onPostExecute(result);
             if (result == null)
                 return;
-
+            if(result.equals("success")){
+//                RegisterTour obj = new RegisterTour(id);
+//                List<RegisterTour> list = DataStorage.registerTours;
+//                list.add(obj);
+                return;
+            }
             Gson gson = new Gson();
             List<attraction> list;
 

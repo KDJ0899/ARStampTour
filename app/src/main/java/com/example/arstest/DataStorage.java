@@ -6,6 +6,7 @@ import com.example.arstest.DTO.attraction;
 import com.example.arstest.DTO.localGU;
 import com.example.arstest.DTO.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,5 +18,5 @@ public class DataStorage {
     public static List<Reward> rewards;
     public static List<RegisterTour> registerTours;
     public static user userDetail = new user();
-    public static String ipAdress ="http://54.180.195.57:3000";
+    public static String ipAdress ="http://10.0.102.44:3000";
 }

@@ -191,17 +191,35 @@ public class MapActivity extends AppCompatActivity
         googleMap.setOnMarkerClickListener(this);
 
 
-        attraction attr = new attraction();
-        for(int i=0; i< DataStorage.attractions.size(); i++){
-            MarkerOptions markerOptions = new MarkerOptions();
-            attr = DataStorage.attractions.get(i);
+        List<attraction> attrs;
+        attraction attr;
+        int num=0;
+        for(int i=0; i<DataStorage.registerTours.size();i++){
+            attrs = DataStorage.guMap.get(DataStorage.registerTours.get(i).getGu_Id());
+            if(attrs != null) {
+                for (int j = 0; j < attrs.size(); j++) {
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    attr = attrs.get(j);
 
-            markerOptions.position(new LatLng(Double.parseDouble(attr.getLatitude()),Double.parseDouble(attr.getLongitude())));
-            tv_marker.setText(attr.getName());
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
-            markerOptions.title(attr.getAtt_Id()+"");
-            markers[i]=(googleMap.addMarker(markerOptions));
+                    markerOptions.position(new LatLng(Double.parseDouble(attr.getLatitude()), Double.parseDouble(attr.getLongitude())));
+                    tv_marker.setText(attr.getName());
+                    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
+                    markerOptions.title(attr.getAtt_Id() + "");
+                    markers[num] = (googleMap.addMarker(markerOptions));
+                    num++;
+                }
+            }
         }
+//        for(int i=0; i< DataStorage.attractions.size(); i++){
+//            MarkerOptions markerOptions = new MarkerOptions();
+//            attr = DataStorage.attractions.get(i);
+//
+//            markerOptions.position(new LatLng(Double.parseDouble(attr.getLatitude()),Double.parseDouble(attr.getLongitude())));
+//            tv_marker.setText(attr.getName());
+//            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
+//            markerOptions.title(attr.getAtt_Id()+"");
+//            markers[i]=(googleMap.addMarker(markerOptions));
+//        }
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
@@ -289,29 +307,58 @@ public class MapActivity extends AppCompatActivity
         CalculateDistance.currentPosition=currentPosition;
         int distance;
         String text;
+        List<attraction> attrs;
         attraction attr = new attraction();
-        for(int i=0; i< markers.length; i++){
-            MarkerOptions markerOptions = new MarkerOptions();
-            attr = DataStorage.attractions.get(i);
+        int num=0;
+        for(int i=0; i<DataStorage.registerTours.size();i++){
+            attrs = DataStorage.guMap.get(DataStorage.registerTours.get(i).getGu_Id());
+            if(attrs != null) {
+                for (int j = 0; j < attrs.size(); j++) {
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    attr = attrs.get(j);
 
-            markerOptions.position(new LatLng(Double.parseDouble(attr.getLatitude()),Double.parseDouble(attr.getLongitude())));
-            distance = (int) LocationDistance.distance(markerOptions.getPosition().latitude,markerOptions.getPosition().longitude,
-                    currentPosition.latitude,currentPosition.longitude);
-            text=attr.getName();
-            tv_marker.setText(attr.getName());
-            if(distance>1000){
-                distance/=100;
-                double d = distance/10.0;
-                tv_marker.setText(text+"("+d+"KM"+")");
+                    markerOptions.position(new LatLng(Double.parseDouble(attr.getLatitude()), Double.parseDouble(attr.getLongitude())));
+                    distance = (int) LocationDistance.distance(markerOptions.getPosition().latitude, markerOptions.getPosition().longitude,
+                            currentPosition.latitude, currentPosition.longitude);
+                    text = attr.getName();
+                    tv_marker.setText(attr.getName());
+                    if (distance > 1000) {
+                        distance /= 100;
+                        double d = distance / 10.0;
+                        tv_marker.setText(text + "(" + d + "KM" + ")");
+                    } else {
+                        if (distance < 100)
+                            tv_marker.setTextColor(Color.RED);
+                        tv_marker.setText(text + "(" + distance + "M" + ")");
+                    }
+                    markers[num].setIcon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
+                    tv_marker.setTextColor(Color.BLUE);
+                    num++;
+                }
             }
-            else {
-                if(distance<100)
-                    tv_marker.setTextColor(Color.RED);
-                tv_marker.setText(text + "(" + distance + "M" + ")");
-            }
-            markers[i].setIcon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
-            tv_marker.setTextColor(Color.BLUE);
         }
+//        for(int i=0; i< markers.length; i++){
+//            MarkerOptions markerOptions = new MarkerOptions();
+//            attr = DataStorage.attractions.get(i);
+//
+//            markerOptions.position(new LatLng(Double.parseDouble(attr.getLatitude()),Double.parseDouble(attr.getLongitude())));
+//            distance = (int) LocationDistance.distance(markerOptions.getPosition().latitude,markerOptions.getPosition().longitude,
+//                    currentPosition.latitude,currentPosition.longitude);
+//            text=attr.getName();
+//            tv_marker.setText(attr.getName());
+//            if(distance>1000){
+//                distance/=100;
+//                double d = distance/10.0;
+//                tv_marker.setText(text+"("+d+"KM"+")");
+//            }
+//            else {
+//                if(distance<100)
+//                    tv_marker.setTextColor(Color.RED);
+//                tv_marker.setText(text + "(" + distance + "M" + ")");
+//            }
+//            markers[i].setIcon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
+//            tv_marker.setTextColor(Color.BLUE);
+//        }
 
 //
 //
