@@ -152,12 +152,19 @@ public class MainActivity extends AppCompatActivity {
             if(result.equals("[]")){
                 Log.i("json","canLogin = "+canLogin);
                 canLogin = false;
-            }else{
-                Log.i("json","canLogin = "+canLogin);
+            }else {
+                Log.i("json", "canLogin = " + canLogin);
                 canLogin = true;
                 jsonObject = jsonArray.get(0).getAsJsonObject();
-                Log.i("json",jsonObject.get("User_Id").toString());
+                Log.i("json", jsonObject.get("User_Id").toString());
                 userID = jsonObject.get("User_Id").toString();
+                DataStorage.userDetail.setUser_Id(Integer.parseInt(userID));
+                DataStorage.userDetail.setID(jsonObject.get("ID").toString());
+                DataStorage.userDetail.setPassword(jsonObject.get("Password").toString());
+                DataStorage.userDetail.setName(jsonObject.get("Name").toString());
+                DataStorage.userDetail.setBirthday(jsonObject.get("Birthday").toString());
+                DataStorage.userDetail.setPhone_No(jsonObject.get("Phone_No").toString());
+                DataStorage.userDetail.setSex(jsonObject.get("Sex").toString());
             }
 
             Log.i("json","검사 전 canLogin = "+canLogin);
