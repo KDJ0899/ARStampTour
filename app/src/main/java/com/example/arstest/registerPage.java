@@ -33,6 +33,7 @@ public class registerPage extends AppCompatActivity {
     String userSex,userSi,userGu;
     String selectedCity="";
     String selectedCityDetail="";
+    Boolean reRegister = false;
     Boolean canRegister = false;
 
     @Override
@@ -46,10 +47,10 @@ public class registerPage extends AppCompatActivity {
         userPassword = findViewById(R.id.userPassword);
         passwordCheck = findViewById(R.id.checkPassword);
         userName = findViewById(R.id.userName);
-        userNumber = findViewById(R.id.userId);
-        year = findViewById(R.id.userId);
-        month = findViewById(R.id.userId);
-        day = findViewById(R.id.userId);
+        userNumber = findViewById(R.id.number);
+        year = findViewById(R.id.year);
+        month = findViewById(R.id.month);
+        day = findViewById(R.id.day);
         male = findViewById(R.id.radioMale);
         female = findViewById(R.id.radioFemale);
         registerBtn = findViewById(R.id.registerBtn);
@@ -112,44 +113,29 @@ public class registerPage extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(userPassword.getText().toString()+"FFFFFFFFFFFFFFFFFFFFFFFFFFf",passwordCheck.getText().toString());
                 if(userPassword.getText().toString().equals(passwordCheck.getText().toString())){
-
-//                    String si = selectedCity;
-//                    String gu = selectedCityDetail;
-//                    ContentValues idCheck = new ContentValues();
-//                    idCheck.put("test","test");
-//                    idCheck.put("where","ID="+userId.getText().toString()+" and Password="+userPassword.getText().toString());
-//                    Log.i("json","********************************* * ID="+userId.getText().toString()+" and Password="+userPassword.getText().toString());
-//                    idCheck.put("idWhere","local_si.name = "+si+" and local_gu.Name = "+gu);
-//                    idCheck.put("siName",si);
-//                    idCheck.put("guName",gu);
-//
-//                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/idCheck",idCheck);
-//                    networkTask.execute();
 
                     if(male.isChecked()){
                         userSex="Male";
                     }else if(female.isChecked()){
                         userSex="Female";
                     }
-                    ContentValues cv = new ContentValues();
-//                    cv.put("ID",userId.getText().toString());
-//                    cv.put("Password",userPassword.getText().toString());
-//                    cv.put("Name",userName.getText().toString());
-//                    cv.put("year",year.getText().toString());
-//                    cv.put("month",month.getText().toString());
-//                    cv.put("day",day.getText().toString());
-//                    cv.put("Phone_No",userNumber.getText().toString());
-//                    cv.put("Sex",userSex);
-//                    cv.put("LOCAL_SI",selectedCity);
-//                    cv.put("LOCAL_GU",selectedCityDetail);
-                    cv.put("table","user");
-                    String userBirth = year+"-"+month+"-"+day;
-                    cv.put("values","("+userId.getText().toString()+","+userPassword.getText().toString()+","+userName.getText().toString()+","+userBirth+","+userNumber.getText().toString()+","+userSex+","+"1,"+"1)");
+                    String userBirth = year.getText().toString()+"-"+month.getText().toString()+"-"+day.getText().toString();
 
-                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/register",cv);
+                    ContentValues val = new ContentValues();
+                    val.put("table","user");
+                    val.put("id",userId.getText().toString());
+                    val.put("password",userPassword.getText().toString());
+                    val.put("name",userName.getText().toString());
+                    val.put("birthday",userBirth);
+                    val.put("phone",userNumber.getText().toString());
+                    val.put("sex",userSex);
+                    val.put("si",selectedCity);
+                    val.put("gu",selectedCityDetail);
+                    val.put("data","('"+userId.getText().toString()+"','"+userPassword.getText().toString()+"','"+userName.getText().toString()+"','"+userBirth+"','"+userNumber.getText().toString()+"','"+userSex+"',");
+                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/register",val);
                     networkTask.execute();
+
                 }else{
                     Toast.makeText(getApplicationContext(),"비밀번호가 같지 않습니다.",Toast.LENGTH_LONG).show();
                 }
@@ -182,7 +168,17 @@ public class registerPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
+            Log.i("json","result = "+result);
+            if(result.equals("reRegister")) {
+                Toast.makeText(getApplicationContext(), "중복된 아이디입니다.", Toast.LENGTH_LONG).show();
+                reRegister = true;
+            }
+            else if(result.equals("success!")) {
+                reRegister = false;
+                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                startActivity(intent);
+            }
+            Log.i("json","reRegister = "+reRegister);
         }
     }
 }

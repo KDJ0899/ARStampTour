@@ -173,20 +173,23 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:maxLength="4"/>
 
                 <EditText
                     android:id="@+id/month"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:maxLength="2"/>
 
                 <EditText
                     android:id="@+id/day"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
+                    android:maxLength="2"
                     android:ems="10"
                     android:inputType="textPersonName" />
             </LinearLayout>
@@ -253,6 +256,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:ems="10"
+                    android:maxLength="11"
                     android:inputType="phone" />
 
             </LinearLayout>
