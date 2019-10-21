@@ -57,7 +57,6 @@ public class RecyclerViewA extends RecyclerView.Adapter<RecyclerViewA.ViewHolder
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), position+"번 째 이미지!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context,landmarkDetail.class);
                 context.startActivity(intent);
             }
@@ -66,14 +65,12 @@ public class RecyclerViewA extends RecyclerView.Adapter<RecyclerViewA.ViewHolder
         holder.textView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Test!", Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), position+"번 째!", Toast.LENGTH_SHORT).show();
             }
         });
     }

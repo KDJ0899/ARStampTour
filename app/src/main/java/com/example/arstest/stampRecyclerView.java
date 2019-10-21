@@ -51,7 +51,6 @@ public class stampRecyclerView extends RecyclerView.Adapter<stampRecyclerView.Vi
                     @Override
                     public void onClick(View v) {
                         String name = String.valueOf(holder.textView.getText());
-                Toast.makeText(v.getContext(), position+"번 째 이미지! "+name, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context,detailPage.class);
                 context.startActivity(intent);
             }
@@ -60,7 +59,6 @@ public class stampRecyclerView extends RecyclerView.Adapter<stampRecyclerView.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), position+"번 째!", Toast.LENGTH_SHORT).show();
             }
         });
     }

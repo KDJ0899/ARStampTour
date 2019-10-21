@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button registerbBtn = (Button)findViewById(R.id.button2);
         Button loginBtn = (Button)findViewById(R.id.loginButton);
-        Button mapBtn = (Button)findViewById(R.id.map);
-        Button homeBtn = (Button)findViewById(R.id.home);
         userId = findViewById(R.id.editText);
         pw = findViewById(R.id.editText3);
 
@@ -71,22 +69,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),registerPage.class);
-                startActivity(intent);
-            }
-        });
-
-        mapBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), searchPage.class);
-                startActivity(intent);
-            }
-        });
-
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),homePage.class);
                 startActivity(intent);
             }
         });

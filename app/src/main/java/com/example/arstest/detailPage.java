@@ -171,7 +171,6 @@ public class detailPage extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Log.i("Dialog","예");
-                                Toast.makeText(getApplicationContext(),"예",Toast.LENGTH_LONG).show();
                                 applyBtn.setText("투어 진행 중");
                                 applyBtn.setBackgroundResource(R.drawable.readibtn_background);
                                 textView1.setTextColor(Color.parseColor("#000000"));
@@ -183,12 +182,10 @@ public class detailPage extends AppCompatActivity {
                                         .setPositiveButton("투어 계속 보기", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                Toast.makeText(getApplicationContext(),"투어계속보기",Toast.LENGTH_LONG).show();
                                             }
                                         }).setNegativeButton("홈으로 돌아가기", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Toast.makeText(getApplicationContext(),"홈으로 돌아가기",Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(),homePage.class);
                                         startActivity(intent);
                                     }
@@ -198,7 +195,6 @@ public class detailPage extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.i("Dialog", "아니오");
-                        Toast.makeText(getApplicationContext(), "아니오", Toast.LENGTH_LONG).show();
                     }
                 }).setCancelable(false).show();
             }
