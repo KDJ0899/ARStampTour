@@ -1,6 +1,8 @@
 package com.example.arstest;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,20 +22,24 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.arstest.DTO.Reward;
 import com.example.arstest.DTO.localGU;
 import com.example.arstest.server.RequestHttpURLConnection;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class rewardPage extends AppCompatActivity implements View.OnClickListener
 {
     private ListView m_oListView = null;
     private Button homeBtn,searchBtn,userBtn,mapBtn,mypageBtn, btn_search;
+    private ImageView image;
     ArrayAdapter<CharSequence> adspin1, adspin2;
     String selectedCategory="";
-    String selectedBrand="";
+    int selectedBrand;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,6 +53,7 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
         mapBtn = findViewById(R.id.map);
         mypageBtn = findViewById(R.id.profile);
         btn_search = findViewById(R.id.btn_search);
+        context=this;
 
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,27 +94,17 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
                 startActivity(intent);
             }
         });
-        ContentValues cv = new ContentValues();
-        cv.put("from","REWARD");
-        cv.put("where","brand="+1);
 
-        NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", cv);
-        networkTask.execute();
+        if(DataStorage.rewards==null) {
+            ContentValues cv = new ContentValues();
+            cv.put("from", "REWARD");
 
-        // 데이터 생성 ============================
-        ArrayList<ItemData> oData = new ArrayList<>();
-        for (int i=0; i<30; ++i)
-        {
-            ItemData oItem = new ItemData();
-            oItem.strTitle = "데이터 " + (i+1);
-            oItem.onClickListener = this;
-            oData.add(oItem);
+            NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress + "/users", cv);
+            networkTask.execute();
         }
 
-        // ListView 생성 ===============================
-        m_oListView = (ListView)findViewById(R.id.list_cards);
-        ListAdapter oAdapter = new ListAdapter(oData);
-        m_oListView.setAdapter(oAdapter);
+        // 데이터 생성 ============================
+
 
 
         final Spinner category = (Spinner)findViewById(R.id.category);
@@ -134,7 +132,7 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
                         //두번째 spinner 선택 이벤트를 정의합니다.
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            selectedBrand = adspin2.getItem(i).toString();
+                            selectedBrand = i+1;
 
                         }
 
@@ -152,7 +150,7 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
                     brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            selectedBrand = adspin2.getItem(i).toString();
+                            selectedBrand = i+1;
                         }
 
                         @Override
@@ -173,9 +171,24 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onClick(View view) {
+                ArrayList<ItemData> oData = new ArrayList<>();
+                List<Reward> list = DataStorage.rewards;
+                for (int i=0; i<list.size(); ++i)
+                {
+                    if(list.get(i).getBRAND()==selectedBrand) {
+                        ItemData oItem = new ItemData();
+                        oItem.image = list.get(i).getImage();
+                        oItem.strTitle = list.get(i).getName();
+                        oItem.strData = list.get(i).getNo_Stamp()+"개";
+                        oItem.onClickListener = this;
+                        oData.add(oItem);
+                    }
+                }
 
-                Toast.makeText(rewardPage.this, "선택된 카테고리는 " + selectedCategory + ", 선택된 브랜드는 " + selectedBrand+" 입니다.", Toast.LENGTH_SHORT).show();
-
+                // ListView 생성 ===============================
+                m_oListView = (ListView)findViewById(R.id.list_cards);
+                ListAdapter oAdapter = new ListAdapter(oData,context);
+                m_oListView.setAdapter(oAdapter);
             }
         });
 
@@ -237,8 +250,9 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
 
             Gson gson = new Gson();
 
-            localGU[] array = gson.fromJson(result, localGU[].class);
-            DataStorage.guList = Arrays.asList(array);
+            Reward[] array = gson.fromJson(result, Reward[].class);
+            DataStorage.rewards = Arrays.asList(array);
+
 
         }
     }

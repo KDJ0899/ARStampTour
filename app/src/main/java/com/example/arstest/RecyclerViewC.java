@@ -70,9 +70,9 @@ public class RecyclerViewC extends RecyclerView.Adapter<RecyclerViewC.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, landmarkDetail.class);
-                intent.putExtra("id",list.get(position).getAtt_Id());
-                intent.putExtra("latitude",list.get(position).getLatitude());
-                intent.putExtra("longitude",list.get(position).getLongitude());
+                intent.putExtra("id",list.get(position).getAtt_Id()+"");
+                intent.putExtra("latitude",Double.parseDouble(list.get(position).getLatitude()));
+                intent.putExtra("longitude",Double.parseDouble(list.get(position).getLongitude()));
                 context.startActivity(intent);
             }
         });
@@ -81,9 +81,9 @@ public class RecyclerViewC extends RecyclerView.Adapter<RecyclerViewC.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, landmarkDetail.class);
-                intent.putExtra("id",list.get(position).getAtt_Id());
-                intent.putExtra("latitude",list.get(position).getLatitude());
-                intent.putExtra("longitude",list.get(position).getLongitude());
+                intent.putExtra("id",list.get(position).getAtt_Id()+"");
+                intent.putExtra("latitude",Double.parseDouble(list.get(position).getLatitude()));
+                intent.putExtra("longitude",Double.parseDouble(list.get(position).getLongitude()));
                 context.startActivity(intent);
             }
         });
@@ -92,9 +92,9 @@ public class RecyclerViewC extends RecyclerView.Adapter<RecyclerViewC.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, landmarkDetail.class);
-                intent.putExtra("id",list.get(position).getAtt_Id());
-                intent.putExtra("latitude",list.get(position).getLatitude());
-                intent.putExtra("longitude",list.get(position).getLongitude());
+                intent.putExtra("id",list.get(position).getAtt_Id()+"");
+                intent.putExtra("latitude",Double.parseDouble(list.get(position).getLatitude()));
+                intent.putExtra("longitude",Double.parseDouble(list.get(position).getLongitude()));
                 context.startActivity(intent);
             }
         });

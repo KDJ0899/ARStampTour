@@ -70,15 +70,7 @@ public class searchPage extends AppCompatActivity {
         userBtn = findViewById(R.id.imageMypage);
         mypageBtn = findViewById(R.id.profile);
         searchBtn = findViewById(R.id.imageSearch);
-        backBtn = findViewById(R.id.backBtn);
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),homePage.class);
-                startActivity(intent);
-            }
-        });
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override

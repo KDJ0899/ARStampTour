@@ -7,52 +7,11 @@
     android:orientation="vertical"
     tools:context=".searchPage">
 
-    <RelativeLayout
-        android:id="@+id/relTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="8dp"
-            android:text="ARS"
-            android:textColor="#000000"
-            android:textSize="36sp" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="59dp"
-            android:background="#000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
-
-        <Button
-            android:id="@+id/backBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/backbtn" />
-
-        <Button
-            android:id="@+id/profile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="360dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </RelativeLayout>
+    <include
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/header"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"

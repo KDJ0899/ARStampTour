@@ -72,7 +72,7 @@ public class detailPage extends AppCompatActivity {
         searchBtn = findViewById(R.id.search);
         rewardBtn = findViewById(R.id.button5);
         mypageBtn = findViewById(R.id.user);
-        mapBtn = findViewById(R.id.map1);
+        mapBtn = findViewById(R.id.map);
         profileBtn = findViewById(R.id.profile);
 
         final AlertDialog.Builder oDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Light_Dialog);

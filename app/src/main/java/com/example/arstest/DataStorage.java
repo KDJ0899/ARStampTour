@@ -1,5 +1,7 @@
 package com.example.arstest;
 
+import com.example.arstest.DTO.RegisterTour;
+import com.example.arstest.DTO.Reward;
 import com.example.arstest.DTO.attraction;
 import com.example.arstest.DTO.localGU;
 
@@ -11,5 +13,7 @@ public class DataStorage {
     public static List<localGU> guList;
     public static Map<Integer,List<attraction>> guMap;
     public static List<attraction> attractions;
-    public static String ipAdress ="http://192.168.0.10:3000";
+    public static List<Reward> rewards;
+    public static List<RegisterTour> registerTours;
+    public static String ipAdress ="http://54.180.195.57:3000";
 }

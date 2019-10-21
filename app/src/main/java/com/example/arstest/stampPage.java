@@ -21,7 +21,6 @@ public class stampPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stamp_page);
 
-        backBtn = findViewById(R.id.backBtn);
         recyclerView = findViewById(R.id.stamprecyclerView);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -29,12 +28,5 @@ public class stampPage extends AppCompatActivity {
         adapter = new stampRecyclerView();
         recyclerView.setAdapter(adapter);
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),myPage.class);
-                startActivity(intent);
-            }
-        });
     }
 }

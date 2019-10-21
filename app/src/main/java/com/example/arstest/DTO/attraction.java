@@ -10,6 +10,8 @@ public class attraction {
     String Longitude;
     int LOCAL_GU;
 
+    int distance;
+
     public int getAtt_Id() {
         return Att_Id;
     }
@@ -72,5 +74,12 @@ public class attraction {
 
     public void setLOCAL_GU(int LOCAL_GU) {
         this.LOCAL_GU = LOCAL_GU;
+    }
+
+    public int getDistance(){
+        return distance;
+    }
+    public void setDistance(int distance){
+        this.distance =distance;
     }
 }

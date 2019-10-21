@@ -9,12 +9,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.arstest.AR.MapActivity;
+import com.example.arstest.DTO.RegisterTour;
 import com.example.arstest.DTO.attraction;
 import com.example.arstest.DTO.localGU;
 import com.example.arstest.server.RequestHttpURLConnection;
@@ -37,6 +40,8 @@ public class homePage extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     public Context context =this;
     private int num =0,randomIndex;
+    List<ImageView> ImageList;
+    List<TextView> TextList;
     Random random;
 
     public static JsonArray jsonArray;
@@ -49,14 +54,41 @@ public class homePage extends AppCompatActivity {
 
         setContentView(R.layout.activity_home_page);
 
-
+        ImageList = new ArrayList<>();
         myStampt1 = findViewById(R.id.myStampTour1);
-        myStampt2 = findViewById(R.id.myStampTour2);
-        myStampt3 = findViewById(R.id.myStampTour3);
+        myStampt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClickBtn(0);
+            }
+        });
+        ImageList.add(myStampt1);
 
+        myStampt2 = findViewById(R.id.myStampTour2);
+        myStampt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClickBtn(1);
+            }
+        });
+        ImageList.add(myStampt2);
+
+        myStampt3 = findViewById(R.id.myStampTour3);
+        myStampt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClickBtn(2);
+            }
+        });
+        ImageList.add(myStampt3);
+
+        TextList = new ArrayList<>();
         localName = findViewById(R.id.localName);
+        TextList.add(localName);
         localName2 = findViewById(R.id.localName2);
+        TextList.add(localName2);
         localName3 = findViewById(R.id.localName3);
+        TextList.add(localName3);
 
         tourBtn =  findViewById(R.id.tourBtn);
 
@@ -92,23 +124,32 @@ public class homePage extends AppCompatActivity {
             random = new Random();
             randomIndex = random.nextInt(DataStorage.guList.size());
 
-            Log.i("ddddddddddddddddddd",""+randomIndex);
-
             recomandImage.setBackgroundResource(getResources().getIdentifier(DataStorage.guList.get(randomIndex).getMainAttraction(), "drawable", context.getPackageName()));
             recomandText.setText(DataStorage.guList.get(randomIndex).getName()+" - "+DataStorage.guList.get(randomIndex).getInfo());
+
+            recomandImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(),detailPage.class);
+                    List<localGU> list = DataStorage.guList;
+                    intent.putExtra("id", list.get(randomIndex).getGu_Id());
+                    intent.putExtra("name", list.get(randomIndex).getName());
+                    intent.putExtra("si", list.get(randomIndex).getLocal_Si());
+                    intent.putExtra("info", list.get(randomIndex).getInfo());
+                    intent.putExtra("image",list.get(randomIndex).getImage());
+                    startActivity(intent);
+                }
+            });
+
+            for(int i=0; i<3;i++){
+                if(DataStorage.registerTours.size()==i){
+                    break;
+                }
+                ImageList.get(i).setBackgroundResource(getResources().getIdentifier(DataStorage.guList.get(DataStorage.registerTours.get(i).getGu_Id()).getMainAttraction(), "drawable", context.getPackageName()));
+                TextList.get(i).setText(DataStorage.guList.get(DataStorage.registerTours.get(i).getGu_Id()).getName());
+            }
         }
 
-
-
-
-
-        myStampt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),detailPage.class);
-                startActivity(intent);
-            }
-        });
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +162,7 @@ public class homePage extends AppCompatActivity {
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),mapPage.class);
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(intent);
             }
         });
@@ -191,8 +232,9 @@ public class homePage extends AppCompatActivity {
 
 
             localGU[] array = gson.fromJson(result, localGU[].class);
-            Log.i("gg",array[1].getMainAttraction()+"");
-            if(array[1].getMainAttraction()!=null){
+            if(array.length==0)
+                return;
+            if(array[0].getMainAttraction()!=null){
                 values = new ContentValues();
                 values.put("from","ATTRACTION");
 
@@ -216,6 +258,20 @@ public class homePage extends AppCompatActivity {
                 recomandImage.setBackgroundResource(getResources().getIdentifier(DataStorage.guList.get(randomIndex).getMainAttraction(), "drawable", context.getPackageName()));
                 recomandText.setText(DataStorage.guList.get(randomIndex).getName()+" - "+DataStorage.guList.get(randomIndex).getInfo());
 
+                recomandImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(),detailPage.class);
+                        List<localGU> list = DataStorage.guList;
+                        intent.putExtra("id", list.get(randomIndex).getGu_Id());
+                        intent.putExtra("name", list.get(randomIndex).getName());
+                        intent.putExtra("si", list.get(randomIndex).getLocal_Si());
+                        intent.putExtra("info", list.get(randomIndex).getInfo());
+                        intent.putExtra("image",list.get(randomIndex).getImage());
+                        startActivity(intent);
+                    }
+                });
+
 
 
                 NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", values);
@@ -223,28 +279,66 @@ public class homePage extends AppCompatActivity {
             }
             else {
                 attraction[] array2 = gson.fromJson(result,attraction[].class);
-                DataStorage.attractions = Arrays.asList(array2);
+                if(array2[0].getAddress()!=null) {
+                    DataStorage.attractions = Arrays.asList(array2);
 
-                DataStorage.guMap = new HashMap<>();
-                int localGu;
-                List<attraction> list;
+                    DataStorage.guMap = new HashMap<>();
+                    int localGu;
+                    List<attraction> list;
 
 
-                for(int i=0; i<array.length; i++){
-                    localGu = array2[i].getLOCAL_GU();
-                    if(DataStorage.guMap.containsKey(localGu)) {
-                        list=DataStorage.guMap.get(localGu);
-                        list.add(array2[i]);
-                        DataStorage.guMap.put(localGu,list);
+                    for (int i = 0; i < array.length; i++) {
+                        localGu = array2[i].getLOCAL_GU();
+                        if (DataStorage.guMap.containsKey(localGu)) {
+                            list = DataStorage.guMap.get(localGu);
+                            list.add(array2[i]);
+                            DataStorage.guMap.put(localGu, list);
+                        } else {
+                            list = new ArrayList<>();
+                            list.add(array2[i]);
+                            DataStorage.guMap.put(localGu, list);
+                        }
                     }
-                    else{
-                        list=new ArrayList<>();
-                        list.add(array2[i]);
-                        DataStorage.guMap.put(localGu,list);
+
+                    values = new ContentValues();
+                    values.put("from","REGISTER_TOUR");
+                    values.put("where","User_Id = 1");
+                    NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/users", values);
+                    networkTask.execute();
+
+                }
+
+                else{
+
+                    RegisterTour[] array3 = gson.fromJson(result,RegisterTour[].class);
+                    DataStorage.registerTours = Arrays.asList(array3);
+
+                    for(int i=0; i<3;i++){
+                        if(DataStorage.registerTours.size()==i){
+                            break;
+                        }
+                        ImageList.get(i).setBackgroundResource(getResources().getIdentifier(DataStorage.guList.get(DataStorage.registerTours.get(i).getGu_Id()).getMainAttraction(), "drawable", context.getPackageName()));
+                        TextList.get(i).setText(DataStorage.guList.get(DataStorage.registerTours.get(i).getGu_Id()).getName());
                     }
+
                 }
             }
 
         }
     }
+    public void ClickBtn(int num){
+        if(DataStorage.registerTours.size()<=num)
+            return;
+        Log.i("########################3",num+"");
+        int id = DataStorage.registerTours.get(num).getGu_Id();
+        Intent intent = new Intent(getApplicationContext(),detailPage.class);
+        List<localGU> list = DataStorage.guList;
+        intent.putExtra("id", list.get(id).getGu_Id());
+        intent.putExtra("name", list.get(id).getName());
+        intent.putExtra("si", list.get(id).getLocal_Si());
+        intent.putExtra("info", list.get(id).getInfo());
+        intent.putExtra("image",list.get(id).getImage());
+        startActivity(intent);
+    }
+
 }

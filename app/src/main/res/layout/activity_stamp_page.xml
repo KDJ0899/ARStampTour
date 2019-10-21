@@ -11,51 +11,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <include
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            layout="@layout/header"/>
 
-            <Button
-                android:id="@+id/backBtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/backbtn"
-                app:layout_constraintEnd_toStartOf="@+id/title"
-                app:layout_constraintHorizontal_bias="0.049"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
-                android:layout_marginTop="8dp"
-                android:text="ARS"
-                android:textColor="#000000"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/profile"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="125dp"
-                android:background="@drawable/profile" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:background="#000000" />
 
         <TextView
             android:id="@+id/textView26"
@@ -121,14 +83,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/stamprecyclerView"
-            android:layout_width="412dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            />
 
         <View
             android:id="@+id/view"
@@ -142,7 +100,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
 
@@ -246,6 +204,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
