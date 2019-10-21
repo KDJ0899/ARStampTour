@@ -123,7 +123,7 @@ public class registerPage extends AppCompatActivity {
                     String userBirth = year.getText().toString()+"-"+month.getText().toString()+"-"+day.getText().toString();
 
                     ContentValues val = new ContentValues();
-                    val.put("table","user");
+                    val.put("table","USER");
                     val.put("id",userId.getText().toString());
                     val.put("password",userPassword.getText().toString());
                     val.put("name",userName.getText().toString());
