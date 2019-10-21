@@ -11,52 +11,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <include
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/map"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/map"
-                app:layout_constraintEnd_toStartOf="@+id/title"
-                app:layout_constraintHorizontal_bias="0.049"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/attractionName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="65dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:text="고척스카이돔"
-                android:textColor="#000000"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/profile"
-                android:layout_width="40dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:background="@drawable/profile" />
-        </LinearLayout>
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:background="#000000"/>
+            android:layout_height="wrap_content"
+            layout="@layout/header"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,9 +26,9 @@
                 android:id="@+id/imageView2"
                 android:layout_width="300dp"
                 android:layout_height="140dp"
-                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:layout_marginTop="25dp"
-                android:layout_weight="1" />
+                android:layout_marginLeft="20dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -181,8 +140,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="32dp"
-                    android:layout_marginTop="20dp"
                     android:layout_marginRight="32dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/home" />
 
                 <TextView
@@ -206,7 +165,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/search" />
+                    android:background="@drawable/search"/>
 
                 <TextView
                     android:id="@+id/textView5"
@@ -227,8 +186,8 @@
                     android:id="@+id/button5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="32dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginLeft="32dp"
                     android:background="@drawable/giftbox" />
 
                 <TextView
@@ -249,9 +208,9 @@
                     android:id="@+id/user"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="32dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/user" />
+                    android:layout_marginLeft="32dp"
+                    android:background="@drawable/user"/>
 
                 <TextView
                     android:id="@+id/textView7"
