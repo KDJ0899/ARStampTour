@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 String password = pw.getText().toString();
 
                 ContentValues cv = new ContentValues();
-                cv.put("from","user");
+                cv.put("from","USER");
                 cv.put("where","ID='"+userid+"' and Password='"+password+"';");
 
                 NetworkTask networkTask = new NetworkTask(DataStorage.ipAdress+"/login", cv);

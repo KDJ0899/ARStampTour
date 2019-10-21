@@ -175,7 +175,8 @@ public class registerPage extends AppCompatActivity {
             }
             else if(result.equals("success!")) {
                 reRegister = false;
-                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                Toast.makeText(getApplicationContext(), "회원가입 완료!.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
             }
             Log.i("json","reRegister = "+reRegister);
