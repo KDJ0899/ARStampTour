@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.arstest.AR.MapActivity;
 import com.example.arstest.DTO.Reward;
 import com.example.arstest.DTO.localGU;
 import com.example.arstest.server.RequestHttpURLConnection;
@@ -53,12 +54,13 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
         mapBtn = findViewById(R.id.map);
         mypageBtn = findViewById(R.id.profile);
         btn_search = findViewById(R.id.btn_search);
+
         context=this;
 
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), searchPage.class);
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(intent);
             }
         });

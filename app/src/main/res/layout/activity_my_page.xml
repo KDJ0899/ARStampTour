@@ -168,7 +168,7 @@
         app:srcCompat="@drawable/userprofile" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -256,10 +256,9 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
-        android:layout_marginLeft="19dp"
         android:layout_marginTop="16dp"
         android:text="스탬프"
         android:textSize="30sp"
@@ -301,10 +300,9 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
         android:layout_marginTop="21dp"
         android:text="참여중인 스탬프 투어"
         android:textSize="30sp"
@@ -313,10 +311,9 @@
 
     <TextView
         android:id="@+id/textView20"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
         android:layout_marginTop="26dp"
         android:text="상품 구매 내역"
         android:textSize="30sp"

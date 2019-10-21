@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arstest.AR.MapActivity;
 import com.example.arstest.DTO.attraction;
 import com.example.arstest.server.RequestHttpURLConnection;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -46,7 +47,7 @@ import java.util.List;
 public class searchPage extends AppCompatActivity {
 
     private Button back;
-    private Button homeBtn,rewardBtn,userBtn,mypageBtn,searchBtn,backBtn;
+    private Button homeBtn,rewardBtn,userBtn,mypageBtn,searchBtn,backBtn,mapBtn;
     LinearLayout layout;
     private TextView landmarkInformation;
     private RecyclerView recyclerView;
@@ -70,15 +71,17 @@ public class searchPage extends AppCompatActivity {
         userBtn = findViewById(R.id.imageMypage);
         mypageBtn = findViewById(R.id.profile);
         searchBtn = findViewById(R.id.imageSearch);
+        mapBtn = findViewById(R.id.map);
 
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
+        mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),searchPage.class);
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(intent);
             }
         });
+
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

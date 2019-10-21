@@ -6,23 +6,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.arstest.AR.MapActivity;
 
 public class myPage extends AppCompatActivity {
 
-    public Button gostampBtn,homeBtn,searchBtn,rewardBtn,mypageBtn,mapBtn;
+    public Button homeBtn,searchBtn,rewardBtn,mypageBtn,mapBtn;
+    public TextView doIngStampTour,userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
-        gostampBtn = (Button) findViewById(R.id.button6);
+        doIngStampTour = findViewById(R.id.textView12);
         homeBtn = findViewById(R.id.homebtn);
         searchBtn = findViewById(R.id.searchbtn);
         rewardBtn = findViewById(R.id.button5);
         mypageBtn = findViewById(R.id.user);
         mapBtn = findViewById(R.id.map);
+        userName = findViewById(R.id.userName);
 
-        gostampBtn.setOnClickListener(new View.OnClickListener() {
+        userName.setText(DataStorage.userDetail.getName().replace("\"","")+" 님");
+
+        doIngStampTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),stampPage.class);
@@ -62,7 +69,7 @@ public class myPage extends AppCompatActivity {
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(intent);
             }
         });
