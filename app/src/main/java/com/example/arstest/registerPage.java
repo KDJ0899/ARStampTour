@@ -43,10 +43,9 @@ public class registerPage extends AppCompatActivity {
         spinnerSi = findViewById(R.id.spinnerSi);
         spinnerGu = findViewById(R.id.spinnerGu);
         userId = findViewById(R.id.userId);
-        userPassword = findViewById(R.id.userId);
+        userPassword = findViewById(R.id.userPassword);
         passwordCheck = findViewById(R.id.checkPassword);
-        userName = findViewById(R.id.userId);
-        userBirth = findViewById(R.id.userId);
+        userName = findViewById(R.id.userName);
         userNumber = findViewById(R.id.userId);
         year = findViewById(R.id.userId);
         month = findViewById(R.id.userId);
@@ -113,6 +112,7 @@ public class registerPage extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i(userPassword.getText().toString()+"FFFFFFFFFFFFFFFFFFFFFFFFFFf",passwordCheck.getText().toString());
                 if(userPassword.getText().toString().equals(passwordCheck.getText().toString())){
 
 //                    String si = selectedCity;
