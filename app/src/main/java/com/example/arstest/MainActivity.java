@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     PendingIntent pintent;
     Boolean canLogin = false;
     public static TextView userId,pw;
+    String userID;
 
     JsonArray jsonArray;
     JsonObject jsonObject;
@@ -163,20 +164,18 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(result);
             Log.i("json","********************************result  = "+result);
 
+            JsonParser jsonParser = new JsonParser();
+            jsonArray = (JsonArray)jsonParser.parse(result);
+
             if(result.equals("[]")){
                 Log.i("json","canLogin = "+canLogin);
                 canLogin = false;
             }else{
                 Log.i("json","canLogin = "+canLogin);
                 canLogin = true;
-            }
-
-            JsonParser jsonParser = new JsonParser();
-            jsonArray = (JsonArray)jsonParser.parse(result);
-
-            for(int i=0; i<jsonArray.size(); i++){
-                jsonObject = jsonArray.get(i).getAsJsonObject();
-                Log.i("json",jsonObject.get("Name").toString());
+                jsonObject = jsonArray.get(0).getAsJsonObject();
+                Log.i("json",jsonObject.get("User_Id").toString());
+                userID = jsonObject.get("User_Id").toString();
             }
 
             Log.i("json","검사 전 canLogin = "+canLogin);
