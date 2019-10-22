@@ -139,7 +139,7 @@ public class SceneformActivity extends AppCompatActivity {
           Capture = (ImageButton) findViewById(R.id.btnCapture);
           Capture.setVisibility(View.VISIBLE);
 
-
+          Back = findViewById(R.id.btnBack);
           Capture.setOnClickListener(capture->{takePhoto();});
           Back.setOnClickListener(new View.OnClickListener() {
               @Override

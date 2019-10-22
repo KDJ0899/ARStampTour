@@ -18,5 +18,5 @@ public class DataStorage {
     public static List<Reward> rewards;
     public static List<RegisterTour> registerTours;
     public static user userDetail = new user();
-    public static String ipAdress ="http://10.0.102.44:3000";
+    public static String ipAdress ="http://54.180.195.57:3000";
 }

@@ -169,24 +169,22 @@
     </string-array>
 
     <string-array name = "category">
+        <item>전체</item>
         <item>식품</item>
         <item>패션</item>
-        <item>도서</item>
-        <item>문화/여가</item>
-        <item>가전/디지털</item>
-        <item>화장품</item>
-        <item>기타</item>
     </string-array>
 
-
     <string-array name = "food_brand">
+        <item>전체</item>
         <item>베스킨라빈스</item>
         <item>파리바게트</item>
         <item>이디야</item>
-        <item>스타벅스</item>
-        <item>자연드림</item>
-        <item>cu</item>
         <item>GS25</item>
+    </string-array>
+
+    <string-array name = "fashion_brand">
+        <item>전체</item>
+        <item>나이키</item>
     </string-array>
 
 </resources>
