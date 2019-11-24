@@ -1,4 +1,4 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.arstest.server.RequestHttpURLConnection;
+import com.example.arstest.DataStorage;
+import com.example.arstest.R;
+import com.example.arstest.Server.RequestHttpURLConnection;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -66,7 +68,7 @@ public class landmarkDetail extends AppCompatActivity implements OnMapReadyCallb
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                Intent intent = new Intent(getApplicationContext(), myPage.class);
                 startActivity(intent);
             }
         });

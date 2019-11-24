@@ -42,8 +42,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.arstest.R;
-import com.example.arstest.detailPage;
-import com.example.arstest.homePage;
+import com.example.arstest.Activity.homePage;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
@@ -52,7 +51,6 @@ import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
-import com.google.ar.sceneform.ux.BaseTransformableNode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

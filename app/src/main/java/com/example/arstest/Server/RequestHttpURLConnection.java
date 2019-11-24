@@ -1,4 +1,4 @@
-package com.example.arstest.server;
+package com.example.arstest.Server;
 
 import android.content.ContentValues;
 import android.util.Log;

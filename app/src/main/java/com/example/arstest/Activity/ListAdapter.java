@@ -1,4 +1,4 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.arstest.ItemData;
+import com.example.arstest.R;
 
 import java.util.ArrayList;
 

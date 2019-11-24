@@ -278,7 +278,7 @@ public class MapActivity extends AppCompatActivity
     @Override
     public boolean onMarkerClick(Marker marker){
         int distance = (int) LocationDistance.distance(marker.getPosition().latitude,marker.getPosition().longitude,currentPosition.latitude,currentPosition.longitude);
-        if(distance>=100){
+        if(distance>=1000000000){
             Toast.makeText(this,"현재 목표까지 거리: "+distance+"M\n" +
                     "100M안까지 접근하세요!",Toast.LENGTH_LONG).show();
         }

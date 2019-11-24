@@ -1,21 +1,13 @@
 package com.example.arstest.AR;
 
 import android.content.Context;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.arstest.DTO.attraction;
 import com.example.arstest.DataStorage;
-import com.example.arstest.MainActivity;
-import com.example.arstest.R;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class CalculateDistance extends Thread {

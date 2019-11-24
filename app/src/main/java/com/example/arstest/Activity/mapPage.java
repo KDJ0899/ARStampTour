@@ -1,4 +1,4 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.arstest.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -48,14 +49,14 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),homePage.class);
+                Intent intent = new Intent(getApplicationContext(), homePage.class);
                 startActivity(intent);
             }
         });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),searchPage.class);
+                Intent intent = new Intent(getApplicationContext(), searchPage.class);
                 startActivity(intent);
             }
         });
@@ -69,7 +70,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
         rewardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),rewardPage.class);
+                Intent intent = new Intent(getApplicationContext(), rewardPage.class);
                 startActivity(intent);
             }
         });

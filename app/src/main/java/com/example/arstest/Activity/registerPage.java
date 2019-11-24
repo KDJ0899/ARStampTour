@@ -1,4 +1,4 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,10 +16,11 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.arstest.server.RequestHttpURLConnection;
+import com.example.arstest.DataStorage;
+import com.example.arstest.R;
+import com.example.arstest.Server.RequestHttpURLConnection;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class registerPage extends AppCompatActivity {
 

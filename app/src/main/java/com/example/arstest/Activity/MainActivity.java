@@ -1,4 +1,4 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +21,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.arstest.server.RequestHttpURLConnection;
-import com.google.android.gms.maps.model.LatLng;
+import com.example.arstest.DataStorage;
+import com.example.arstest.R;
+import com.example.arstest.Server.RequestHttpURLConnection;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

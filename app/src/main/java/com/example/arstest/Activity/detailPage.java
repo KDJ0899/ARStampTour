@@ -1,4 +1,4 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,14 +17,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arstest.DTO.RegisterTour;
 import com.example.arstest.DTO.attraction;
-import com.example.arstest.server.RequestHttpURLConnection;
+import com.example.arstest.DataStorage;
+import com.example.arstest.R;
+import com.example.arstest.Server.RequestHttpURLConnection;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -122,7 +122,7 @@ public class detailPage extends AppCompatActivity {
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                Intent intent = new Intent(getApplicationContext(), myPage.class);
                 startActivity(intent);
             }
         });
@@ -159,7 +159,7 @@ public class detailPage extends AppCompatActivity {
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),mapPage.class);
+                Intent intent = new Intent(getApplicationContext(), mapPage.class);
                 startActivity(intent);
             }
         });

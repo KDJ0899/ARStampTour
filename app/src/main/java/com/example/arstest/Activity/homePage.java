@@ -1,4 +1,4 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,9 @@ import com.example.arstest.AR.MapActivity;
 import com.example.arstest.DTO.RegisterTour;
 import com.example.arstest.DTO.attraction;
 import com.example.arstest.DTO.localGU;
-import com.example.arstest.server.RequestHttpURLConnection;
+import com.example.arstest.DataStorage;
+import com.example.arstest.R;
+import com.example.arstest.Server.RequestHttpURLConnection;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
@@ -191,7 +192,7 @@ public class homePage extends AppCompatActivity {
         mypageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                Intent intent = new Intent(getApplicationContext(), myPage.class);
                 startActivity(intent);
             }
         });
@@ -207,7 +208,7 @@ public class homePage extends AppCompatActivity {
         tourBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),stampPage.class);
+                Intent intent = new Intent(getApplicationContext(), stampPage.class);
                 startActivity(intent);
             }
         });

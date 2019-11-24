@@ -1,6 +1,5 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,12 +19,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.arstest.AR.MapActivity;
 import com.example.arstest.DTO.Reward;
-import com.example.arstest.DTO.localGU;
-import com.example.arstest.server.RequestHttpURLConnection;
+import com.example.arstest.DataStorage;
+import com.example.arstest.ItemData;
+import com.example.arstest.R;
+import com.example.arstest.Server.RequestHttpURLConnection;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class rewardPage extends AppCompatActivity implements View.OnClickListene
         mypageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),myPage.class);
+                Intent intent = new Intent(getApplicationContext(), myPage.class);
                 startActivity(intent);
             }
         });

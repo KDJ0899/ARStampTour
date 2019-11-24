@@ -1,26 +1,19 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arstest.DTO.localGU;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.example.arstest.DataStorage;
+import com.example.arstest.R;
 
-import java.lang.reflect.Member;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder> {
@@ -67,7 +60,7 @@ public class RecyclerViewB extends RecyclerView.Adapter<RecyclerViewB.ViewHolder
             public void onClick(View v) {
 
                 if(table=="Gu") {
-                    Intent intent = new Intent(context,detailPage.class);
+                    Intent intent = new Intent(context, detailPage.class);
                     intent.putExtra("id", list.get(position).getGu_Id());
                     intent.putExtra("name", list.get(position).getName());
                     intent.putExtra("si", list.get(position).getLocal_Si());

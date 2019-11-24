@@ -1,22 +1,17 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arstest.DTO.attraction;
-import com.example.arstest.DTO.localGU;
-import com.example.arstest.DataStorage;
 import com.example.arstest.R;
-import com.example.arstest.landmarkDetail;
 
 import java.util.List;
 

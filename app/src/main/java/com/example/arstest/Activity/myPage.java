@@ -1,4 +1,4 @@
-package com.example.arstest;
+package com.example.arstest.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.arstest.AR.MapActivity;
+import com.example.arstest.DataStorage;
+import com.example.arstest.R;
 
 public class myPage extends AppCompatActivity {
 
@@ -40,21 +42,21 @@ public class myPage extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),homePage.class);
+                Intent intent = new Intent(getApplicationContext(), homePage.class);
                 startActivity(intent);
             }
         });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),searchPage.class);
+                Intent intent = new Intent(getApplicationContext(), searchPage.class);
                 startActivity(intent);
             }
         });
         rewardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),rewardPage.class);
+                Intent intent = new Intent(getApplicationContext(), rewardPage.class);
                 startActivity(intent);
             }
         });

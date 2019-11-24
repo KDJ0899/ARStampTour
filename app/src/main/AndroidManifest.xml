@@ -37,16 +37,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDPuYd8zAAullLNzWKqRFCJCzEXbJvMpDw" />
 
-        <activity android:name=".stampPage"></activity>
-        <activity android:name=".rewardPage"/>
-        <activity android:name=".searchPage" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".homePage" />
-        <activity android:name=".landmarkDetail" />
-        <activity android:name=".mapPage" />
-        <activity android:name=".detailPage" />
-        <activity android:name=".myPage" />
-        <activity android:name=".registerPage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.stampPage"></activity>
+        <activity android:name=".Activity.rewardPage"/>
+        <activity android:name=".Activity.searchPage" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Activity.homePage" />
+        <activity android:name=".Activity.landmarkDetail" />
+        <activity android:name=".Activity.mapPage" />
+        <activity android:name=".Activity.detailPage" />
+        <activity android:name=".Activity.myPage" />
+        <activity android:name=".Activity.registerPage" />
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
