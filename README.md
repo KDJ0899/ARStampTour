@@ -13,9 +13,3 @@
 
 ![프로젝트 요약](https://user-images.githubusercontent.com/41800328/71977577-7b958d00-325c-11ea-85e2-e04fb7e6dae2.png)
 
-
-
-  **시스템 구성도**
-
-![시스템 구성도](https://user-images.githubusercontent.com/41800328/71977385-0033db80-325c-11ea-8d2f-356dc109721a.png)
-
