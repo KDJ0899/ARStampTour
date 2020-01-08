@@ -8,6 +8,7 @@
 
 기술 스택 : **JAVA, NodeJS, MySQL**
 
-## 
+시스템 구성도
 
+![시스템 구성도](https://user-images.githubusercontent.com/41800328/71977385-0033db80-325c-11ea-8d2f-356dc109721a.png)
 
