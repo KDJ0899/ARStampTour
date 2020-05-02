@@ -6,7 +6,7 @@
 
 인원 : 3명
 
-기술 스택 : **JAVA, NodeJS, MySQL**
+기술 스택 : **JAVA, NodeJS, MySQL, Google ARCore SDK, Android X, Google Maps API**
 
 ##
 
